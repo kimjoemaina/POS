@@ -26,5 +26,12 @@
         "age": "0",
         "phone_no": "123456789",
         "email": "imaniinami@example.com"
+    },
+    {
+        "customer_id": "9587",
+        "name": "Test customer",
+        "age": "18",
+        "phone_no": "0718777588",
+        "email": "test@testcustomer.com"
     }
 ]
