@@ -1,0 +1,30 @@
+[
+    {
+        "customer_id": "5496",
+        "name": "Kimani",
+        "age": "28",
+        "phone_no": "0716315678",
+        "email": "kimanijmaina@gmail.com"
+    },
+    {
+        "customer_id": "6691",
+        "name": "Trevor",
+        "age": "17",
+        "phone_no": "123456789",
+        "email": "trevor@example.com"
+    },
+    {
+        "customer_id": "8255",
+        "name": "Eunice",
+        "age": "15",
+        "phone_no": "0712345678",
+        "email": "eunice@example.com"
+    },
+    {
+        "customer_id": "1485",
+        "name": "Imani Inami",
+        "age": "0",
+        "phone_no": "123456789",
+        "email": "imaniinami@example.com"
+    }
+]
