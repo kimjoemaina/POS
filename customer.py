@@ -18,7 +18,7 @@ def customer_menu():
         print(" (3) Update customer ")
         print(" (4) View customer")
         print(" (5) View customer database ")
-        print(" (6) Go back ")
+        # print(" (6) Go back ")
         selection = int(input("Enter your choice : \n"))
 
         if selection == 1:
