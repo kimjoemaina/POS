@@ -44,7 +44,7 @@ def view_customer_database():
             phone_no = item["phone_no"]
             email = item["email"]
             
-            print(f'Index: {i}')
+            print(f'Entry: {i}')
             print(f"Customer ID: {customer_id}")
             print(f"Name: {name}")
             print(f"Age: {age}")
@@ -72,7 +72,35 @@ def delete_customer():
     with open(filename, "w") as f:
         json.dump(c_data, f, indent=4)
     print(f"Customer {id} deleted successfully!")
+
+
+def update_customer():
+    with open(filename, "r") as customer_db:
+        customer_data = json.load(customer_db)
+        id_generator = str(random.randint(1000, 9999))
+        c_entry = len(customer_data) - 1
+        id = int(input(f"Which entry would you like to modify? 0 - {c_entry}\n"))
+        i = 0
+        for c in customer_data:
+            if i == id:
+                customer_id = c["customer_id"]
+                name = c["name"]
+                age = c["age"]
+                phone_no = c["phone_no"]
+                email = c["email"]
+                
+                print(f"Customer ID: {customer_id}")
+                print(f"Name: {name}")
+                print(f"Age: {age}")
+                print(f"Phone No.: {phone_no}")
+                print(f"Email: {email}")
+            i += 1
+
         
+        attribute = input("Which attribute would you like to modify?")
+        print("")
+
+
 
 if __name__ == "__main__":
-    delete_customer()
+    update_customer()
