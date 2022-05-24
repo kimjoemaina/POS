@@ -2,7 +2,6 @@ from fileinput import filename
 import random
 import json
 
-from test import view_customer_database
 
 filename = "customer.json"
 # class Customer:
@@ -37,6 +36,8 @@ def customer_menu():
         elif selection == 5:
             view_customer_db()
             break
+        else:
+            print("Invalid selection! Please try again.")
 
 def add_customer():
     with open(filename) as customer_db:
@@ -136,7 +137,7 @@ def update_customer():
     print("Customer details updated successfully!")
 
 def view_customer():
-    view_customer_database()
+    view_customer_db()
     with open(filename) as customer_db:
         customer_data = json.load(customer_db)
         id = int(input("Entry to view:\n"))
@@ -178,4 +179,4 @@ def view_customer_db():
             i += 1
   
 if __name__ == "__main__":
-    view_customer()
+    customer_menu()
