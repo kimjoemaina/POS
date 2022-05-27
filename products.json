@@ -1,16 +1,16 @@
 [
     {
-        "product_name": "HP Probook",
-        "sku": "577568",
-        "product_category": "Laptops",
-        "vendor": "HP",
-        "vendor_phone": "+123456789"
+        "SKU": 69504,
+        "Product Category": "Laptops",
+        "Product Name": "Macbook pro",
+        "Vendor": "Apple",
+        "Vendor Phone No.": "+123456789"
     },
     {
-        "product_name": "Lenovo",
-        "sku": "688104",
-        "product_category": "Laptops",
-        "vendor": "Lenovo",
-        "vendor_phone": "+123456789"
+        "SKU": 19933,
+        "Product Category": "Stationery",
+        "Product Name": "Pencil",
+        "Vendor": "HB",
+        "Vendor Phone No.": "0752654987"
     }
 ]
