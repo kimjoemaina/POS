@@ -1,58 +1,29 @@
 [
     {
-        "customer_id": "1512",
-        "name": "Wambui",
-        "age": "28",
-        "phone_no": "0716315678",
-        "email": "kimanijmaina@gmail.com"
+        "Customer ID": "7916",
+        "First Name": "Joe",
+        "Last Name": "Kimani",
+        "Age": "28",
+        "Phone No.": "0705777588",
+        "Email": "joemainak@gmail.com",
+        "City": "Nairobi"
     },
     {
-        "customer_id": "6691",
-        "name": "Trevor",
-        "age": "17",
-        "phone_no": "123456789",
-        "email": "trevor@example.com"
+        "Customer ID": "5087",
+        "First Name": "Alfred",
+        "Last Name": "Mwangangi",
+        "Age": "20",
+        "Phone No.": "0712654987",
+        "Email": "alfred.mwangangi@jenga.com",
+        "City": "Nairobi"
     },
     {
-        "customer_id": "5627",
-        "name": "Eunice",
-        "age": "15",
-        "phone_no": "0712345678",
-        "email": "eunice@example.com"
-    },
-    {
-        "customer_id": "1485",
-        "name": "Imani Inami",
-        "age": "0",
-        "phone_no": "123456789",
-        "email": "imaniinami@example.com"
-    },
-    {
-        "customer_id": "1450",
-        "name": "Test",
-        "age": "18",
-        "phone_no": "0123456789",
-        "email": "test@testmail.com"
-    },
-    {
-        "customer_id": "7804",
-        "name": "Neville",
-        "age": "20",
-        "phone_no": "0712345678",
-        "email": "neville@gmail.com"
-    },
-    {
-        "customer_id": "6839",
-        "name": "Someone New",
-        "age": "18",
-        "phone_no": "123456789",
-        "email": "somenewperson@example.com"
-    },
-    {
-        "customer_id": "4691",
-        "name": "Someone Young",
-        "age": "12",
-        "phone_no": "321654987",
-        "email": "someoneelse@gmail.com"
+        "Customer ID": "6302",
+        "First Name": "Albert",
+        "Last Name": "Guess",
+        "Age": "30",
+        "Phone No.": "0745632187",
+        "Email": "albert@jenga.com",
+        "City": "Nairobi"
     }
 ]
