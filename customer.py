@@ -1,15 +1,37 @@
-from fileinput import filename
 import random
 import json
 
-
 filename = "customer.json"
-# class Customer:
-#     def __init__(self, customer_id, name, age, phoneNo):
-#         self.customer_id = customer_id
-#         self.name = name
-#         self.age = age
-#         self.phone = phoneNo
+
+class Customer:
+    def __init__(self, customer_id, first_name, last_name, age, phone, email, city):
+        """ Enter Customer Details """
+        # assert customer_id == int, "Customer ID should be int!"
+
+        self.customer_id = customer_id
+        self.first_name = first_name
+        self.last_name = last_name
+        self.age = age
+        self.phone = phone
+        self.email = email
+        self.city = city
+
+    def person(self):
+        c_details = {"Customer ID": self.customer_id, "First Name": self.first_name, "Last Name": self.last_name, "Age": self.age, "Phone No.": self.phone, "Email": self.email, "City": self.city}
+        return c_details
+
+    def __str__(self):
+        customer_info = (f"""
+        Customer ID: {self.customer_id}
+        First Name: {self.first_name}
+        Last Name: {self.last_name}
+        Age: {self.age}
+        Phone No.: {self.phone}
+        Email: {self.email}
+        City: {self.city}
+        """)
+        return customer_info
+        
 def customer_menu():
     while True:
         print("Select a Customer Operation.")
@@ -27,9 +49,9 @@ def customer_menu():
         elif selection == 2:
             delete_customer()
             break
-        elif selection == 3:
-            update_customer()
-            break
+        # elif selection == 3:
+        #     update_customer()
+        #     break
         elif selection == 4:
             view_customer()
             break
@@ -42,141 +64,70 @@ def customer_menu():
 def add_customer():
     with open(filename) as customer_db:
         customer_data = json.load(customer_db)
-        id_generator = str(random.randint(1000, 9999))
-        customer_id = id_generator
-        name = input("Customer name:\n").capitalize()
+        customer_id = str(random.randint(1000, 9999))
+        first_name = input("First Name:\n").capitalize()
+        last_name = input("Last Name:\n").capitalize()
         age = input("Age:\n")
-        phone_no = input("Enter customer phone:\n")
-        email = input("Customer Email:\n")
-        new_customer = {"customer_id": customer_id, "name": name, "age": age, "phone_no": phone_no, "email": email}
-        customer_data.append(new_customer)
+        phone_no = input("Phone No.:\n")
+        email = input("Email:\n")
+        city = input("City of Residence:\n")
+        
+        new_customer = Customer(customer_id, first_name, last_name, age, phone_no, email, city)
+        customer_data.append(new_customer.person())
+        
 
     with open(filename, "w") as f:
         json.dump(customer_data, f, indent=4)
     print(f"Customer {customer_id} added successfully!")
 
 def delete_customer():
-    view_customer_db()
-    c_data = []
-    with open(filename, "r") as customer_db:
-        customer_data = json.load(customer_db)
-        c_index = len(customer_data) - 1
-        id = int(input(f"Enter customer entry to delete: (0 - {c_index})\n"))
-        warning = input("Are you sure? *** THIS ACTION IS IRREVERSIBLE! *** (Y/N)\n").upper()
-        i = 0
-        
-        for c in customer_data:
-            if warning == "Y":
-                if i == id:
-                    pass
-                    i += 1
-                else:
-                    c_data.append(c)
-                    i += 1
-            elif warning == "N":
-                c_data.append(c)
-                i += 1
-        
-        if warning == "Y":
-            print(f"Customer {id} deleted successfully!")
-        elif warning == "N":
-            print(f"No changes made!")
-
-    with open(filename, "w") as f:
-        json.dump(c_data, f, indent=4)
-
-def update_customer():
-    view_customer_db()
-    with open(filename, "r") as customer_db:
-        customer_data = json.load(customer_db)
-        id_generator = str(random.randint(1000, 9999))
-        c_entry = len(customer_data) - 1
-        id = int(input(f"Which entry would you like to modify? 0 - {c_entry}\n"))
-        i = 0
-        for c in customer_data:
-            if i == id:
-                customer_id = c["customer_id"]
-                name = c["name"]
-                age = c["age"]
-                phone_no = c["phone_no"]
-                email = c["email"]
-                
-                print(f"Customer ID: {customer_id}")
-                print(f"Name: {name}")
-                print(f"Age: {age}")
-                print(f"Phone No.: {phone_no}")
-                print(f"Email: {email}\n")
-            i += 1
-        print("Which attribute would you like to modify?")
-        print(" (1) Customer ID ")
-        print(" (2) Name ")
-        print(" (3) Age")
-        print(" (4) Phone No.")
-        print(" (5) Email ")
-        attribute = int(input(""))
-
-        n = 0
-        for p in customer_data:
-            if n == id:
-                if attribute == 1:
-                    p["customer_id"] = id_generator
-                    break
-                elif attribute == 2:
-                    p["name"] = input("Enter new name:\n")
-                    break
-                elif attribute == 3:
-                    p["age"] == input("Enter new age:\n")
-                elif attribute == 4:
-                    p["phone_no"] == input("Enter new Phone No.:\n")
-                elif attribute == 5:
-                    p["email"] == input("Enter new Email: \n")
-            n += 1
-
-    with open(filename, "w") as f:
-        json.dump(customer_data, f, indent=4)
-    print("Customer details updated successfully!")
-
-def view_customer():
-    view_customer_db()
     with open(filename) as customer_db:
         customer_data = json.load(customer_db)
-        id = int(input("Entry to view:\n"))
-        i = 0
-        for c in customer_data:
-            if i == id:
-                customer_id = c["customer_id"]
-                name = c["name"]
-                age = c["age"]
-                phone_no = c["phone_no"]
-                email = c["email"]
-                
-                print(f"Customer ID: {customer_id}")
-                print(f"Name: {name}")
-                print(f"Age: {age}")
-                print(f"Phone No.: {phone_no}")
-                print(f"Email: {email}\n")
-            i += 1
+        c_ref = input("Enter Customer ID:\n")
+        warning = input("Are you sure? ***THIS ACTION IS IRREVERSIBLE*** (Y/N)\n").upper()
+        j = 0
+
+        # iterate over customer_data list
+        for i in customer_data:
+            if i["Customer ID"] == c_ref:
+                customer_data.pop(j)
+            j += 1
+        
+        
+        # if warning == "Y":
+        #     print(f"Customer {c_ref} deleted successfully!")
+        # elif warning == "N":
+        #     print("No changes made!")
+        # else:
+        #     print("Invalid Entry. Try again.")
 
 
+        with open(filename, "w") as f:
+            json.dump(customer_data, f, indent=4)
+        
+
+# View customer details using Customer ID
+def view_customer():
+    with open(filename) as customer_db:
+        customer_data = json.load(customer_db)
+        c_ref = input("Enter Customer ID:\n")
+        j = 0
+
+        for i in customer_data:
+            c = Customer(i["Customer ID"], i["First Name"], i["Last Name"], i["Age"], i["Phone No."], i["Email"], i["City"])
+            d = c.person()
+            if d["Customer ID"] == c_ref:
+                print(c)
+            j += 1
+
+# View customer Database
 def view_customer_db():
     with open(filename, "r") as customer_db:
         customer_data = json.load(customer_db)
-        i = 0
-        for item in customer_data:
-            customer_id = item["customer_id"]
-            name = item["name"]
-            age = item["age"]
-            phone_no = item["phone_no"]
-            email = item["email"]
-            
-            print(f"Entry: {i}")
-            print(f"Customer ID: {customer_id}")
-            print(f"Name: {name}")
-            print(f"Age: {age}")
-            print(f"Phone No.: {phone_no}")
-            print(f"Email: {email}")
-            print("\n")
-            i += 1
+
+        for c in customer_data:
+            c = Customer(c["Customer ID"], c["First Name"], c["Last Name"], c["Age"], c["Phone No."], c["Email"], c["City"])
+            print(c)
   
 if __name__ == "__main__":
-    customer_menu()
+    delete_customer()
