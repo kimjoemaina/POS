@@ -78,13 +78,14 @@ def add_customer():
         
         new_customer = Customer(customer_id, first_name, last_name, age, phone_no, email, city)
         c_details = new_customer.__dict__
-        customer_data.append(c_details)
+        customer_data.append(c_details)  
         
-
     with open(filename, "w") as f:
         json.dump(customer_data, f, indent=4)
-    print(f"Customer {customer_id} added successfully!")
+    print(f"\nCustomer {customer_id} added successfully!\n")
     customer_menu()
+    
+
 
 # 2. Delete customer from JSON File
 def delete_customer():
@@ -126,7 +127,7 @@ def update_customer():
         customer_data = json.load(customer_db)
         update_c = input("Which customer would you like to update?\nEnter Customer ID:\n")
 
-        for i in customer_data:
+        for i in customer_data:            
             c = Customer(i["customer_id"], i["first_name"], i["last_name"], i["age"], i["phone"], i["email"], i["city"])
             d = c.__dict__
             if d["customer_id"] == update_c:
@@ -269,6 +270,7 @@ def view_customer():
             d = c.__dict__
             if d["customer_id"] == c_ref:
                 print(c)
+                return d
     customer_menu()
         
 
