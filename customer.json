@@ -1,29 +1,38 @@
 [
     {
-        "Customer ID": "7916",
-        "First Name": "Joe",
-        "Last Name": "Kimani",
-        "Age": "28",
-        "Phone No.": "0705777588",
-        "Email": "joemainak@gmail.com",
-        "City": "Nairobi"
+        "customer_id": "5333",
+        "first_name": "Joe",
+        "last_name": "Kimani",
+        "age": "26",
+        "phone": "+123456789",
+        "email": "someone@somewhere.com",
+        "city": "Somewhere"
     },
     {
-        "Customer ID": "5087",
-        "First Name": "Alfred",
-        "Last Name": "Mwangangi",
-        "Age": "20",
-        "Phone No.": "0712654987",
-        "Email": "alfred.mwangangi@jenga.com",
-        "City": "Nairobi"
+        "customer_id": "6111",
+        "first_name": "Joe",
+        "last_name": "Doe",
+        "age": "20",
+        "phone": "+254712345678",
+        "email": "joe@example.com",
+        "city": "Kikuyu"
     },
     {
-        "Customer ID": "6302",
-        "First Name": "Albert",
-        "Last Name": "Guess",
-        "Age": "30",
-        "Phone No.": "0745632187",
-        "Email": "albert@jenga.com",
-        "City": "Nairobi"
+        "customer_id": "2893",
+        "first_name": "Jane",
+        "last_name": "Mwakideu",
+        "age": "18",
+        "phone": "+25412345698",
+        "email": "jane@gmail.com",
+        "city": "Nakuru"
+    },
+    {
+        "customer_id": "9589",
+        "first_name": "Fred",
+        "last_name": "Matiang'i",
+        "age": "65",
+        "phone": "+25478965485",
+        "email": "matiangi@interior.co.ke",
+        "city": "Nairobi"
     }
 ]
