@@ -5,7 +5,7 @@ from purchase import purchase_operations
 def menu():
     while True:
         print("***** Welcome to the POS *****")
-        print("***** Please choose a menu ******")
+        print("***** Please select a menu ******")
         print(" 1 : Customer Operations")
         print(" 2 : Product Operations")
         print(" 3 : Purchase Operations")
