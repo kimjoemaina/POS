@@ -1,0 +1,11 @@
+[
+    {
+        "customer_id": "9589",
+        "customer_name": "Fred",
+        "product_name": "Cabbage",
+        "price": 50,
+        "quantity": 2,
+        "date": "03/06/2022",
+        "Total": 100
+    }
+]
