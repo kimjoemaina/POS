@@ -34,5 +34,23 @@
         "phone": "+25478965485",
         "email": "matiangi@interior.co.ke",
         "city": "Nairobi"
+    },
+    {
+        "customer_id": "3769",
+        "first_name": "Uhuru",
+        "last_name": "Kenyatta",
+        "age": "60",
+        "phone": "+2547123456789",
+        "email": "uhuru@gov.co.ke",
+        "city": "Nairobi"
+    },
+    {
+        "customer_id": "2431",
+        "first_name": "Uhuru",
+        "last_name": "Kenyatta",
+        "age": "60",
+        "phone": "+2547123456789",
+        "email": "uhuru@gov.co.ke",
+        "city": "Nairobi"
     }
 ]
