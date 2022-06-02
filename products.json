@@ -1,16 +1,38 @@
 [
     {
-        "SKU": 69504,
-        "Product Category": "Laptops",
-        "Product Name": "Macbook pro",
-        "Vendor": "Apple",
-        "Vendor Phone No.": "+123456789"
+        "sku": "68843",
+        "product_category": "Food",
+        "product_name": "Cabbage",
+        "product_price": 50,
+        "product_vendor": "Selina njeri mugoci ",
+        "vendor_phone": "+254712345678",
+        "stock_capacity": 80
     },
     {
-        "SKU": 19933,
-        "Product Category": "Stationery",
-        "Product Name": "Pencil",
-        "Vendor": "HB",
-        "Vendor Phone No.": "0752654987"
+        "sku": "15864",
+        "product_category": "Laptops",
+        "product_name": "Macbook pro",
+        "product_price": 150000,
+        "product_vendor": "Apple",
+        "vendor_phone": "+123456789",
+        "stock_capacity": 10
+    },
+    {
+        "sku": "64284",
+        "product_category": "Stationery",
+        "product_name": "Hb pencils",
+        "product_price": 20,
+        "product_vendor": "HB",
+        "vendor_phone": "0752654987",
+        "stock_capacity": 200
+    },
+    {
+        "sku": "85426",
+        "product_category": "Footwear",
+        "product_name": "Akala",
+        "product_price": 150,
+        "product_vendor": "Lemaiyan",
+        "vendor_phone": "0712852963",
+        "stock_capacity": 15
     }
 ]
