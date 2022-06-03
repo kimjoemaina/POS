@@ -73,15 +73,17 @@ def sell_something():
                 c_name = customer["first_name"]
                 price = i["product_price"]
                 prod_name = i["product_name"]
-                quantity = int(input("QTY:\n"))
+                quantity = int(input("Quantity (QTY):\n"))
                 today = datetime.now()
                 date = today.strftime("%d/%m/%Y")
                 purchase = Purchase(c_id, c_name, prod_name, price, quantity, date)
                 first_purchase = purchase.__dict__
                 first_checkout = purchase.checkout()
                 first_purchase.update({"Total" : first_checkout})
+                new_stock_cnt = i["stock_capacity"] - quantity
+                i.update({"stock_capacity": new_stock_cnt})
                 purchase_data.append(purchase.__dict__)
-                
+
                 while True:
                     confirmation = input("Would you like anything else? (Y/N)\n").upper()
                     
@@ -99,16 +101,25 @@ def sell_something():
                                 price = i["product_price"]
                                 prod_name = i["product_name"]
 
-                                quantity = int(input("QTY:\n"))
+                                quantity = int(input("Quantity (QTY):\n"))
                                 today = datetime.now()
                                 date = today.strftime("%d/%m/%Y")
-                                purchase = Purchase(c_id, c_name, prod_name, price, quantity, date)                                
+                                purchase = Purchase(c_id, c_name, prod_name, price, quantity, date)      
+                                other_purchase = purchase.__dict__
+                                other_checkout = purchase.checkout()
+                                other_purchase.update({"Total" : other_checkout})
+                                new_stock_cnt = i["stock_capacity"] - quantity
+                                i.update({"stock_capacity": new_stock_cnt})               
                                 purchase_data.append(purchase.__dict__)
                     elif confirmation == "N":
+                        print(f"Sale successful! Total: {other_checkout + first_checkout}.")
                         break
                     else:
                         print("Invalid input. Try again.")
-    
+
+    with open (products, "w") as p:
+        json.dump(product_data, p, indent=4)
+
     with open(purchases, "w") as f:
         json.dump(purchase_data, f, indent=4)
 
