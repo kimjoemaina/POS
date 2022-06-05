@@ -24,6 +24,5 @@ def menu():
         else:
             print(" Wrong selection, enter again. ")
 
-
 if __name__ == "__main__":
     menu()
