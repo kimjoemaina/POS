@@ -21,6 +21,7 @@ class Purchase:
     
     def checkout(self):
         return self.price * self.quantities
+    
    
 def purchase_operations():
     while True:
@@ -84,8 +85,8 @@ def sell():
                 print(f'Product Name: {i["product_name"]}')
                 print(f'Price: {i["product_price"]}\n')
 
-                c_id = customer["customer_id"]
-                c_name = f'{customer["first_name"]} {customer["last_name"]}'
+                customer_id = customer["customer_id"]
+                customer_name = f'{customer["first_name"]} {customer["last_name"]}'
                 price = i["product_price"]
                 prod_sku = i["sku"]
                 prod_name = (i["product_name"])
@@ -98,7 +99,7 @@ def sell():
                 
                 today = datetime.now()
                 date = today.strftime("%d/%m/%Y")
-                purchases = Purchase(transaction_id, c_id, c_name, prod_sku, prod_name, price, quantity, date)
+                purchases = Purchase(transaction_id, customer_id, customer_name, prod_sku, prod_name, price, quantity, date)
                 totals = purchases.checkout()
                 purchase = purchases.__dict__
                 product_skus.append(i["sku"])
@@ -124,10 +125,26 @@ def sell():
                 if confirmation == "Y":
                     new_order
                 elif confirmation == "N":
+                    receipt = (f'''
+                    Transaction ID: {transaction_id}
+                    Customer ID: {customer_id}
+                    Customer Name: {customer_name}
+                    Products SKU: {purchase["product_sku"]}
+                    Product Names: {purchase["product_name"]}
+                    Prices: {purchase["price"]}
+                    Quantities: {purchase["quantities"]}
+                    Date: {purchase["date"]}
+                    Totals: {purchase["totals"]}
+                    Grand Total: {purchase["grand_total"]}
+                    ''')
+
                     print(f'\nTotal: {sum(totals_list)}\n')
                     cash_given = int(input("Amount Tendered (Ksh):"))
                     change = cash_given - sum(totals_list)
                     print(f'Change: Ksh. {change}\n')
+
+                    print(receipt)
+
                     new_order = False
     purchase_data.append(purchase)   
                 
