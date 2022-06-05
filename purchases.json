@@ -91,5 +91,27 @@
             110
         ],
         "grand_total": 110
+    },
+    {
+        "transaction_id": "5096997",
+        "customer_id": "1767",
+        "customer_name": "Adrian Kamau",
+        "product_sku": [
+            "42599"
+        ],
+        "product_name": [
+            "Milk"
+        ],
+        "price": [
+            55
+        ],
+        "quantities": [
+            2
+        ],
+        "date": "06/06/2022",
+        "totals": [
+            110
+        ],
+        "grand_total": 110
     }
 ]
