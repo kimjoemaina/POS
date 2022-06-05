@@ -1,3 +1,4 @@
+from itertools import product
 import json
 import random
 
@@ -43,18 +44,23 @@ def product_menu():
 
         if selection == 1:
             add_new_item()
+            product_menu()
             break
         elif selection == 2:
             delete_item()
+            product_menu()
             break
         elif selection == 3:
             update_product()
+            product_menu()
             break
         elif selection == 4:
             view_item()
+            product_menu()
             break
         elif selection == 5:
             view_product_db()
+            product_menu()
             break
         elif selection == 6:
             from main import menu
@@ -67,7 +73,7 @@ def product_menu():
 def add_new_item():
     with open(filename) as product_db:
         product_data = json.load(product_db)
-        sku_generator = random.randint(10000, 99999)
+        sku_generator = str(random.randint(10000, 99999))
         product_category = input("Product category:\n").capitalize()
         product_name = input("Product Name:\n").capitalize()
         product_price = input("Product price (NO SPECIAL CHARACTERS):\n")
@@ -81,8 +87,7 @@ def add_new_item():
     
     with open(filename, "w") as f:
         json.dump(product_data, f, indent=4)
-    print(f"Product {sku_generator} added successfully!")
-    product_menu()
+    print(f"\nProduct {sku_generator} added successfully!\n")
 
 # 2. Delete product from database
 def delete_item():
@@ -100,7 +105,7 @@ def delete_item():
                 warning = input("\nAre you sure? ***THIS ACTION IS IRREVERSIBLE*** (Y/N)\n").upper()
                 if warning == "Y":
                     product_data.pop(j)
-                    print(f"Product {p_ref} deleted successfully!\n")
+                    print(f"\nProduct {p_ref} deleted successfully!\n")
                     break
                 elif warning == "N":
                     print("\nNo changes made!\n")
@@ -115,7 +120,6 @@ def delete_item():
 
     with open(filename, "w") as f:
         json.dump(product_data, f, indent=4)
-    product_menu()
 
 # 3. Update product details
 
@@ -284,28 +288,32 @@ def update_product():
     
     with open(filename, "w") as f:
         json.dump(product_data, f, indent=4)
-    product_menu()
 
 # 4. View product
 def view_item():
     with open(filename) as product_db:
         product_data = json.load(product_db)
-        sku_view = int(input("Enter Product SKU:\n"))
+        sku_view = input("Enter Product SKU:\n")
         j = 0
 
         for i in product_data:
-            p = Product(i["SKU"], i["Product Category"], i["Product Name"], i["Vendor"], i["Vendor Phone No."])
-            if i["SKU"] == sku_view:
+            p = Product(i["sku"], i["product_category"], i["product_name"], i["product_price"], i["product_vendor"], i["vendor_phone"], i["stock_capacity"])
+            p_dict = p.__dict__
+            if i["sku"] == sku_view:
                 print(p)
+                return p_dict
+        else:
+            print("\nProduct not available!\n")
+
 
 def view_product_db():
     with open(filename) as product_db:
         product_data = json.load(product_db)
 
         for i in product_data:
-            p = Product(i["SKU"], i["Product Category"], i["Product Name"], i["Vendor"], i["Vendor Phone No."])
+            p = Product(i["sku"], i["product_category"], i["product_name"], i["product_price"], i["product_vendor"], i["vendor_phone"], i["stock_capacity"])
             print(p)
 
 
 if __name__ == "__main__":
-    delete_item()
+    product_menu()
