@@ -44,15 +44,18 @@ def customer_menu():
 
         if selection == 1:
             add_customer()
+            customer_menu()
             break
         elif selection == 2:
             delete_customer()
+            customer_menu()
             break
         elif selection == 3:
             update_customer()
             break
         elif selection == 4:
             view_customer()
+            customer_menu()
             break
         elif selection == 5:
             view_customer_db()
@@ -83,8 +86,6 @@ def add_customer():
     with open(filename, "w") as f:
         json.dump(customer_data, f, indent=4)
     print(f"\nCustomer {customer_id} added successfully!\n")
-    customer_menu()
-    
 
 
 # 2. Delete customer from JSON File
@@ -118,7 +119,6 @@ def delete_customer():
 
     with open(filename, "w") as f:
         json.dump(customer_data, f, indent=4)
-    customer_menu()
                
 
 # 3. Update customer details
@@ -271,7 +271,9 @@ def view_customer():
             if d["customer_id"] == c_ref:
                 print(c)
                 return d
-    customer_menu()
+        else:
+            print("\nCustomer not found!\n")
+            
         
 
 # 5. View customer Database
