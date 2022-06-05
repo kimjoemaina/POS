@@ -6,16 +6,7 @@
         "product_price": 50,
         "product_vendor": "Selina njeri mugoci ",
         "vendor_phone": "+254712345678",
-        "stock_capacity": 80
-    },
-    {
-        "sku": "15864",
-        "product_category": "Laptops",
-        "product_name": "Macbook pro",
-        "product_price": 150000,
-        "product_vendor": "Apple",
-        "vendor_phone": "+123456789",
-        "stock_capacity": 10
+        "stock_capacity": 78
     },
     {
         "sku": "64284",
@@ -24,7 +15,7 @@
         "product_price": 20,
         "product_vendor": "HB",
         "vendor_phone": "0752654987",
-        "stock_capacity": 200
+        "stock_capacity": 193
     },
     {
         "sku": "85426",
@@ -33,6 +24,24 @@
         "product_price": 150,
         "product_vendor": "Lemaiyan",
         "vendor_phone": "0712852963",
+        "stock_capacity": 15
+    },
+    {
+        "sku": "42599",
+        "product_category": "Food",
+        "product_name": "Milk",
+        "product_price": 55,
+        "product_vendor": "Kinangop milk",
+        "vendor_phone": "+25412345678",
+        "stock_capacity": 34
+    },
+    {
+        "sku": "67956",
+        "product_category": "Clothing",
+        "product_name": "Male tshirt",
+        "product_price": 300,
+        "product_vendor": "Nairobi textiles",
+        "vendor_phone": "+2547123456789",
         "stock_capacity": 15
     }
 ]
