@@ -45,12 +45,39 @@
         "city": "Nairobi"
     },
     {
-        "customer_id": "2431",
-        "first_name": "Uhuru",
-        "last_name": "Kenyatta",
+        "customer_id": "8706",
+        "first_name": "William",
+        "last_name": "Ruto",
         "age": "60",
-        "phone": "+2547123456789",
-        "email": "uhuru@gov.co.ke",
+        "phone": "+2547185696",
+        "email": "ruto@gov.co.ke",
         "city": "Nairobi"
+    },
+    {
+        "customer_id": "6473",
+        "first_name": "Johnny",
+        "last_name": "Walker",
+        "age": "67",
+        "phone": "+254712852963",
+        "email": "johnnywalker@gmail.com",
+        "city": "Nakuru"
+    },
+    {
+        "customer_id": "1767",
+        "first_name": "Adrian",
+        "last_name": "Kamau",
+        "age": "24",
+        "phone": "+254123456789",
+        "email": "adrian@gmail.com",
+        "city": "Naivasha"
+    },
+    {
+        "customer_id": "1855",
+        "first_name": "Adrian",
+        "last_name": "Kamau",
+        "age": "24",
+        "phone": "+254123456789",
+        "email": "adrian@gmail.com",
+        "city": "Naivasha"
     }
 ]
