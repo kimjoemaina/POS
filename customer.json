@@ -1,83 +1,102 @@
 [
     {
-        "customer_id": "5333",
+        "customer_id": 5333,
         "first_name": "Joe",
         "last_name": "Kimani",
         "age": "26",
         "phone": "+123456789",
         "email": "someone@somewhere.com",
-        "city": "Somewhere"
+        "city": "Somewhere",
+        "reg_date": "29/05/2022"
     },
     {
-        "customer_id": "6111",
+        "customer_id": 6111,
         "first_name": "Joe",
         "last_name": "Doe",
         "age": "20",
         "phone": "+254712345678",
         "email": "joe@example.com",
-        "city": "Kikuyu"
+        "city": "Kikuyu",
+        "reg_date": "29/05/2022"
     },
     {
-        "customer_id": "2893",
+        "customer_id": 2893,
         "first_name": "Jane",
         "last_name": "Mwakideu",
         "age": "18",
         "phone": "+25412345698",
         "email": "jane@gmail.com",
-        "city": "Nakuru"
+        "city": "Nakuru",
+        "reg_date": "30/05/2022"
     },
     {
-        "customer_id": "9589",
+        "customer_id": 9589,
         "first_name": "Fred",
         "last_name": "Matiang'i",
         "age": "65",
         "phone": "+25478965485",
         "email": "matiangi@interior.co.ke",
-        "city": "Nairobi"
+        "city": "Nairobi",
+        "reg_date": "31/05/2022"
     },
     {
-        "customer_id": "3769",
+        "customer_id": 3769,
         "first_name": "Uhuru",
         "last_name": "Kenyatta",
         "age": "60",
         "phone": "+2547123456789",
         "email": "uhuru@gov.co.ke",
-        "city": "Nairobi"
+        "city": "Nairobi",
+        "reg_date": "02/06/2022"
     },
     {
-        "customer_id": "8706",
+        "customer_id": 8706,
         "first_name": "William",
         "last_name": "Ruto",
         "age": "60",
         "phone": "+2547185696",
         "email": "ruto@gov.co.ke",
-        "city": "Nairobi"
+        "city": "Nairobi",
+        "reg_date": "03/06/2022"
     },
     {
-        "customer_id": "6473",
+        "customer_id": 2818,
         "first_name": "Johnny",
         "last_name": "Walker",
         "age": "67",
         "phone": "+254712852963",
         "email": "johnnywalker@gmail.com",
-        "city": "Nakuru"
+        "city": "Nakuru",
+        "reg_date": "05/06/2022"
     },
     {
-        "customer_id": "1767",
+        "customer_id": 1767,
         "first_name": "Adrian",
         "last_name": "Kamau",
         "age": "24",
         "phone": "+254123456789",
         "email": "adrian@gmail.com",
-        "city": "Naivasha"
+        "city": "Naivasha",
+        "reg_date": "06/06/2022"
     },
     {
-        "customer_id": "1855",
+        "customer_id": 1855,
         "first_name": "Adrian",
         "last_name": "Kamau",
         "age": "24",
         "phone": "+254123456789",
         "email": "adrian@gmail.com",
-        "city": "Naivasha"
+        "city": "Naivasha",
+        "reg_date": "06/06/2022"
+    },
+    {
+        "customer_id": 6654,
+        "first_name": "Neville",
+        "last_name": "Osoro",
+        "age": "24",
+        "phone": "+254712365487",
+        "email": "neville@gmail.com",
+        "city": "Nakuru",
+        "reg_date": "06/06/2022"
     }
 ]
