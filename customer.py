@@ -1,19 +1,20 @@
+from datetime import datetime
 import random
 import json
 
 filename = "customer.json"
 
 class Customer:
-    def __init__(self, customer_id, first_name, last_name, age, phone, email, city):
+    def __init__(self, customer_id, first_name, last_name, age, phone, email, city, reg_date):
         """ Enter Customer Details """
-
-        self.customer_id = customer_id
+        self.customer_id = int(customer_id)
         self.first_name = first_name
         self.last_name = last_name
         self.age = age
         self.phone = phone
         self.email = email
         self.city = city
+        self.reg_date = reg_date
 
     def __str__(self):
         customer_info = (f"""
@@ -24,6 +25,7 @@ class Customer:
         Phone No.: {self.phone}
         Email: {self.email}
         City: {self.city}
+        Registration Date: {self.reg_date}
         """)
         return customer_info
 
@@ -59,6 +61,7 @@ def customer_menu():
             break
         elif selection == 5:
             view_customer_db()
+            customer_menu()
             break
         elif selection == 6:
             from main import menu
@@ -71,15 +74,18 @@ def customer_menu():
 def add_customer():
     with open(filename) as customer_db:
         customer_data = json.load(customer_db)
-        customer_id = str(random.randint(1000, 9999))
+        customer_id = random.randint(1000, 9999)
         first_name = input("First Name:\n").capitalize()
         last_name = input("Last Name:\n").capitalize()
         age = input("Age:\n")
         phone_no = input("Phone No.:\n")
         email = input("Email:\n")
-        city = input("City of Residence:\n")
+        city = input("City of Residence:\n").capitalize()
+        registration_date = datetime.now()
+        date = registration_date.strftime("%d/%m/%Y")
+
         
-        new_customer = Customer(customer_id, first_name, last_name, age, phone_no, email, city)
+        new_customer = Customer(customer_id, first_name, last_name, age, phone_no, email, city, date)
         c_details = new_customer.__dict__
         customer_data.append(c_details)  
         
@@ -92,7 +98,7 @@ def add_customer():
 def delete_customer():
     with open(filename) as customer_db:
         customer_data = json.load(customer_db)
-        c_ref = input("Enter Customer ID:\n")
+        c_ref = int(input("Enter Customer ID:\n"))
         
         j = 0
 
@@ -125,10 +131,10 @@ def delete_customer():
 def update_customer():
     with open(filename) as customer_db:
         customer_data = json.load(customer_db)
-        update_c = input("Which customer would you like to update?\nEnter Customer ID:\n")
+        update_c = int(input("Which customer would you like to update?\nEnter Customer ID:\n"))
 
         for i in customer_data:            
-            c = Customer(i["customer_id"], i["first_name"], i["last_name"], i["age"], i["phone"], i["email"], i["city"])
+            c = Customer(i["customer_id"], i["first_name"], i["last_name"], i["age"], i["phone"], i["email"], i["city"], i["reg_date"])
             d = c.__dict__
             if d["customer_id"] == update_c:
                 print(c)
@@ -147,7 +153,7 @@ def update_customer():
                 update_a = int(input("Which attribute you like to update?\n"))
                 # Customer ID update
                 if update_a == 1:
-                    new_id = str(random.randint(1000,9999))
+                    new_id = random.randint(1000,9999)
                     confirm = input("\nAre you sure of this action? (Y/N)\n*** THIS ACTION IS IRREVERSIBLE! ***\n").upper()
                     if confirm == "Y":
                         i["customer_id"] = new_id
@@ -263,10 +269,10 @@ def update_customer():
 def view_customer():
     with open(filename) as customer_db:
         customer_data = json.load(customer_db)
-        c_ref = input("Enter Customer ID:\n")
+        c_ref = int(input("Enter Customer ID:\n"))
         for i in customer_data:
             # instance of customer class
-            c = Customer(i["customer_id"], i["first_name"], i["last_name"], i["age"], i["phone"], i["email"], i["city"])
+            c = Customer(i["customer_id"], i["first_name"], i["last_name"], i["age"], i["phone"], i["email"], i["city"], i["reg_date"])
             d = c.__dict__
             if d["customer_id"] == c_ref:
                 print(c)
@@ -274,16 +280,21 @@ def view_customer():
         else:
             print("\nCustomer not found!\n")
             
-        
-
 # 5. View customer Database
 def view_customer_db():
     with open(filename, "r") as customer_db:
         customer_data = json.load(customer_db)
-        for i in customer_data:
-            c = Customer(i["customer_id"], i["first_name"], i["last_name"], i["age"], i["phone"], i["email"], i["city"])
-            print(c)
-    customer_menu()
+        view_query = int(input("[1] View All\n[2] Sory by Customer ID\n[3] Sort by Name\n[4] Sort by Date\n"))
+        j=0
+        
+
+        if view_query == 1:
+            for i in customer_data:
+                c = Customer(i["customer_id"], i["first_name"], i["last_name"], i["age"], i["phone"], i["email"], i["city"], i["reg_date"])
+                print(c)
+
+        elif view_query == 2:
+            pass
   
 if __name__ == "__main__":
     customer_menu()
