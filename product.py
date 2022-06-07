@@ -1,4 +1,3 @@
-from itertools import product
 import json
 import random
 
@@ -6,6 +5,7 @@ filename = "products.json"
 
 class Product:
     def __init__(self, sku, product_category, product_name, product_price, product_vendor, vendor_phone, stock_capacity):
+        # assert type(sku) == int and type(product_price) == int and type(stock_capacity) == int, "ints not used"
         self.sku = sku
         self.product_category = product_category
         self.product_name = product_name
@@ -73,13 +73,28 @@ def product_menu():
 def add_new_item():
     with open(filename) as product_db:
         product_data = json.load(product_db)
-        sku_generator = str(random.randint(10000, 99999))
+        sku_generator = random.randint(10000, 99999)
         product_category = input("Product category:\n").capitalize()
         product_name = input("Product Name:\n").capitalize()
-        product_price = input("Product price (NO SPECIAL CHARACTERS):\n")
+        
+        while True:
+            product_price = input("Product price (NUMBERS ONLY. NO SPECIAL CHARACTERS):\n")
+            try:
+                value = int(product_price)
+                break
+            except ValueError:
+                print("Invalid input! Try again.\n")
+        
         vendor = input("Vendor:\n").capitalize()
         vendor_phone = input("Vendor Phone No.:\n")
-        items_in_stock = (input("No of items (NO SPECIAL CHARACTERS):\n"))
+
+        while True:
+            items_in_stock = input("No of items (NUMBERS ONLY. NO SPECIAL CHARACTERS):\n")
+            try:
+                stock_value = int(items_in_stock)
+                break
+            except:
+                print("Invalid input! Try again.\n")
 
         new_product = Product(sku_generator, product_category, product_name, product_price, vendor, vendor_phone, items_in_stock)
         p_details = new_product.__dict__
@@ -93,7 +108,7 @@ def add_new_item():
 def delete_item():
     with open(filename) as product_db:
         product_data = json.load(product_db)
-        p_ref = input("Enter product SKU:\n")
+        p_ref = int(input("Enter product SKU:\n"))
 
         j = 0
 
@@ -293,7 +308,7 @@ def update_product():
 def view_item():
     with open(filename) as product_db:
         product_data = json.load(product_db)
-        sku_view = input("Enter Product SKU:\n")
+        sku_view = int(input("Enter Product SKU:\n"))
         j = 0
 
         for i in product_data:
@@ -305,7 +320,7 @@ def view_item():
         else:
             print("\nProduct not available!\n")
 
-
+# 5. View product database
 def view_product_db():
     with open(filename) as product_db:
         product_data = json.load(product_db)
