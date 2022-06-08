@@ -419,4 +419,4 @@ def view_product_db():
 
 
 if __name__ == "__main__":
-    view_product_db()
+    product_menu()
