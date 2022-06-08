@@ -39,7 +39,7 @@ def product_menu():
         print(" [3] Update Existing Item ")
         print(" [4] View Existing Item ")
         print(" [5] View Product Database ")
-        print(" [6] Back to main menu")
+        print(" [6] Back to main menu ")
         # print(" (6) Go back ")
 
         selection = int(input("Enter product operation: \n"))
