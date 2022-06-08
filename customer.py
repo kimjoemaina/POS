@@ -284,17 +284,76 @@ def view_customer():
 def view_customer_db():
     with open(filename, "r") as customer_db:
         customer_data = json.load(customer_db)
-        view_query = int(input("[1] View All\n[2] Sort by Customer ID\n[3] Sort by Name\n[4] Sort by Date\n"))
+        view_query = int(input("[1] View All\n[2] Sort by Customer ID\n[3] Sort by Name\n"))
         j=0
-        
-
-        if view_query == 1:
-            for i in customer_data:
-                c = Customer(i["customer_id"], i["first_name"], i["last_name"], i["age"], i["phone"], i["email"], i["city"], i["reg_date"])
+        for i in customer_data:
+            c = Customer(i["customer_id"], i["first_name"], i["last_name"], i["age"], i["phone"], i["email"], i["city"], i["reg_date"])
+            if view_query == 1:
                 print(c)
+            elif view_query == 2:
+                order_id = input("Sort:\n[A] Ascending\n[D] Descending\n(Enter A/D)\n").upper()
+                check_db = True
+                if order_id == "A":
+                    sorted_by_id = sorted(customer_data, key = lambda i: i["customer_id"])
+                    for s in sorted_by_id:
+                        print(f'''
+                        Customer ID: {s["customer_id"]}
+                        Name: {s["first_name"]} {s["last_name"]}
+                        Age: {s["age"]}
+                        Phone: {s["phone"]}
+                        Email: {s["email"]}
+                        City: {s["city"]}
+                        Registration Date: {s["reg_date"]}
+                        ''')
+                    break
+                elif order_id == "D":
+                    sorted_by_id = sorted(customer_data, key = lambda d: d["first_name"], reverse=True)
+                    for s in sorted_by_id:
+                        print(f'''
+                        Customer ID: {s["customer_id"]}
+                        Name: {s["first_name"]} {s["last_name"]}
+                        Age: {s["age"]}
+                        Phone: {s["phone"]}
+                        Email: {s["email"]}
+                        City: {s["city"]}
+                        Registration Date: {s["reg_date"]}
+                        ''')
+                    break
+                else:
+                    print("Invalid input. Try again.\n")
+                    break
+                    check_db
+            elif view_query == 3:
+                order_name  = input("Sort:\n[A] Ascending\n[D] Descending\n(Enter A/N)\n").upper()
+                if order_name == "A":
+                    sorted_by_name = sorted(customer_data, key = lambda n: n["first_name"])
+                    for s in sorted_by_name:
+                        print(f'''
+                        Customer ID: {s["customer_id"]}
+                        Name: {s["first_name"]} {s["last_name"]}
+                        Age: {s["age"]}
+                        Phone: {s["phone"]}
+                        Email: {s["email"]}
+                        City: {s["city"]}
+                        Registration Date: {s["reg_date"]}
+                        ''')
+                    break
+                elif order_name == "D":
+                    sorted_by_name = sorted(customer_data, key = lambda n: n["first_name"], reverse=True)
+                    for s in sorted_by_name:
+                        print(f'''
+                        Customer ID: {s["customer_id"]}
+                        Name: {s["first_name"]} {s["last_name"]}
+                        Age: {s["age"]}
+                        Phone: {s["phone"]}
+                        Email: {s["email"]}
+                        City: {s["city"]}
+                        Registration Date: {s["reg_date"]}
+                        ''')
+                    break
+                else:
+                    print("Invalid input!\n")
+                    break
 
-        elif view_query == 2:
-            pass
-  
 if __name__ == "__main__":
-    view_customer_db()
+    customer_menu()
