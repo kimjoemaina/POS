@@ -284,7 +284,7 @@ def view_customer():
 def view_customer_db():
     with open(filename, "r") as customer_db:
         customer_data = json.load(customer_db)
-        view_query = int(input("[1] View All\n[2] Sory by Customer ID\n[3] Sort by Name\n[4] Sort by Date\n"))
+        view_query = int(input("[1] View All\n[2] Sort by Customer ID\n[3] Sort by Name\n[4] Sort by Date\n"))
         j=0
         
 
@@ -297,4 +297,4 @@ def view_customer_db():
             pass
   
 if __name__ == "__main__":
-    customer_menu()
+    view_customer_db()
