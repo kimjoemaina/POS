@@ -60,7 +60,7 @@ def sell():
     transaction_id = str(random.randint(100000, 9999999))
     new_order = True
 
-    
+
     with open(customers) as customer_db:
         customer_data = json.load(customer_db)
         customer = view_customer()
