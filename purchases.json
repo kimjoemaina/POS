@@ -1,117 +1,29 @@
 [
     {
-        "transaction_id": "592969",
-        "customer_id": "8706",
-        "customer_name": "William Ruto",
-        "product_sku": [
-            "64284"
-        ],
-        "product_name": [
-            "Hb pencils"
-        ],
-        "price": [
-            20
-        ],
-        "quantities": [
-            3
-        ],
-        "date": "05/06/2022",
-        "totals": [
-            60
-        ],
-        "grand_total": 60
-    },
-    {
-        "transaction_id": "4988505",
-        "customer_id": "1855",
-        "customer_name": "Adrian Kamau",
+        "transaction_id": "3445548",
+        "customer_id": 6111,
+        "customer_name": "Joe Doe",
         "product_sku": [
             "64284",
-            "68843"
+            "42599"
         ],
         "product_name": [
             "Hb pencils",
-            "Cabbage"
+            "Milk"
         ],
         "price": [
             20,
-            50
-        ],
-        "quantities": [
-            2,
-            2
-        ],
-        "date": "05/06/2022",
-        "totals": [
-            40,
-            100
-        ],
-        "grand_total": 140
-    },
-    {
-        "transaction_id": "1085491",
-        "customer_id": "1855",
-        "customer_name": "Adrian Kamau",
-        "product_sku": [
-            "64284"
-        ],
-        "product_name": [
-            "Hb pencils"
-        ],
-        "price": [
-            20
-        ],
-        "quantities": [
-            2
-        ],
-        "date": "05/06/2022",
-        "totals": [
-            40
-        ],
-        "grand_total": 40
-    },
-    {
-        "transaction_id": "5511008",
-        "customer_id": "8706",
-        "customer_name": "William Ruto",
-        "product_sku": [
-            "42599"
-        ],
-        "product_name": [
-            "Milk"
-        ],
-        "price": [
             55
         ],
         "quantities": [
-            2
-        ],
-        "date": "05/06/2022",
-        "totals": [
-            110
-        ],
-        "grand_total": 110
-    },
-    {
-        "transaction_id": "5096997",
-        "customer_id": "1767",
-        "customer_name": "Adrian Kamau",
-        "product_sku": [
-            "42599"
-        ],
-        "product_name": [
-            "Milk"
-        ],
-        "price": [
-            55
-        ],
-        "quantities": [
+            3,
             2
         ],
         "date": "06/06/2022",
         "totals": [
+            60,
             110
         ],
-        "grand_total": 110
+        "grand_total": 170
     }
 ]
