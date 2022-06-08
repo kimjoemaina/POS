@@ -23,4 +23,10 @@ Features:
 1. Download the zipped files.
 2. Extract to your folder of choice.
 3. Open the extracted folder in a terminal of your choice.
-4. 
+4. Type `python3 main.py` to start the program and follow the on-screen prompts.
+
+Enjoy!
+
+
+## 👱 Customer Operations
+### Adding customer
