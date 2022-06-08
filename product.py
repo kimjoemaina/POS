@@ -326,31 +326,18 @@ def view_item():
 def view_product_db():
     with open(filename) as product_db:
         product_data = json.load(product_db)
-        print("Select an option:")
-        print(" [V] View All")
-        print(" [S] Sort")
-        view = input("\n").upper()
-
+        view = int(input("[1] View All\n[2] Sort by Product SKU\n[3] Sort by Product Name\n"))
 
         for i in product_data:
             p = Product(i["sku"], i["product_category"], i["product_name"], i["product_price"], i["product_vendor"], i["vendor_phone"], i["stock_capacity"])
-            if view == "V":
+            if view == 1:
                 print(p)
-            elif view == "S":
-                print(" Sort by:")
-                print(" [N] Name")
-                print(" [S] SKU")
-                sort_by = input("\n").upper()
-                if sort_by == "N":
-                    print("Sort:")
-                    print(" [A] Ascending")
-                    print(" [D] Descending")
-                    name_sort = input("\n").upper()
-                    
-                    if name_sort == "A":
-                        sorted_by_name = sorted(product_data, key = lambda k: k["product_name"])
-                        for s in sorted_by_name:
-                            print(f'''
+            elif view == 2:
+                order = input("Sort:\n[A] Ascending\n[D] Descending\n(ENTER A/D)\n").upper()
+                if order == "A":
+                    sorted_by_sku  = sorted(product_data, key = lambda j: j["sku"])
+                    for s in sorted_by_sku:
+                        print(f'''
                             SKU: {s["sku"]}
                             Product Category: {s["product_category"]}
                             Product Name: {s["product_name"]}
@@ -359,11 +346,11 @@ def view_product_db():
                             Vendor Phone: {s["vendor_phone"]}
                             Stock Capacity: {s["stock_capacity"]}
                             ''')
-                        break
-                    elif name_sort == "D":
-                        sorted_by_name = sorted(product_data, key = lambda k: k["product_name"], reverse=True)
-                        for s in sorted_by_name:
-                            print(f'''
+                    break
+                elif order == "D":
+                    sorted_by_sku  = sorted(product_data, key = lambda j: j["sku"], reverse=True)
+                    for s in sorted_by_sku:
+                        print(f'''
                             SKU: {s["sku"]}
                             Product Category: {s["product_category"]}
                             Product Name: {s["product_name"]}
@@ -372,20 +359,16 @@ def view_product_db():
                             Vendor Phone: {s["vendor_phone"]}
                             Stock Capacity: {s["stock_capacity"]}
                             ''')
-                        break
-                    else:
-                        print("Invalid input! Try again.")
-
-                elif sort_by == "S":
-                    print("Sort:")
-                    print(" [A] Ascending")
-                    print(" [D] Descending")
-                    sku_sort = input("\n").upper()
-
-                    if sku_sort == "A":
-                        sorted_by_sku = sorted(product_data, key = lambda p: p["sku"])
-                        for s in sorted_by_sku:
-                            print(f'''
+                    break
+                else:
+                    print("Invalid input! Try again!\n")
+                    break
+            elif view == 3:
+                prod_search = input("Sort:\n[A] Ascending\n[D] Descending\n(Enter A/N)\n").upper()
+                if prod_search == "A":
+                    sorted_by_name = sorted(product_data, key = lambda n: n["product_name"])
+                    for s in sorted_by_name:
+                        print(f'''
                             SKU: {s["sku"]}
                             Product Category: {s["product_category"]}
                             Product Name: {s["product_name"]}
@@ -394,29 +377,23 @@ def view_product_db():
                             Vendor Phone: {s["vendor_phone"]}
                             Stock Capacity: {s["stock_capacity"]}
                             ''')
-                        break
-                    elif sku_sort == "D":
-                        sorted_by_sku = sorted(product_data, key = lambda k: k["sku"], reverse=True)
-                        for s in sorted_by_sku: 
-                            print(f'''
-                                SKU: {s["sku"]}
-                                Product Category: {s["product_category"]}
-                                Product Name: {s["product_name"]}
-                                Product Price: {s["product_price"]}
-                                Product Vendor: {s["product_vendor"]}
-                                Vendor Phone: {s["vendor_phone"]}
-                                Stock Capacity: {s["stock_capacity"]}
-                                ''')
-                        break
-
-
-
-            else:
-                print("Invalid input! Try again.")
-                view_product_db()
-                break
-                    
-
+                    break
+                elif prod_search == "D":
+                    sorted_by_name = sorted(product_data, key = lambda n: n["product_name"], reverse=True)
+                    for s in sorted_by_name:
+                        print(f'''
+                            SKU: {s["sku"]}
+                            Product Category: {s["product_category"]}
+                            Product Name: {s["product_name"]}
+                            Product Price: {s["product_price"]}
+                            Product Vendor: {s["product_vendor"]}
+                            Vendor Phone: {s["vendor_phone"]}
+                            Stock Capacity: {s["stock_capacity"]}
+                            ''')
+                    break
+                else:
+                    print("Invalid input! Try again.\n")
+                    break             
 
 if __name__ == "__main__":
     product_menu()
