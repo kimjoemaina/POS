@@ -9,20 +9,27 @@ def menu():
         print(" 1 : Customer Operations")
         print(" 2 : Product Operations")
         print(" 3 : Purchase Operations")
+        print(" 4 : Exit")
 
-        selection = int(input(" Enter your choice: \n"))
 
-        if selection == 1:
-            customer_menu()
-            break
-        elif selection == 2:
-            product_menu()
-            break
-        elif selection == 3:
-            purchase_operations()
-            break
+        selection = input("Enter your choice:\n")
+
+        if selection.isdigit():
+            if selection == "1":
+                customer_menu()
+                break
+            elif selection == "2":
+                product_menu()
+                break
+            elif selection == "3":
+                purchase_operations()
+                break
+            elif selection == "4":
+                exit()
+            else:
+                print("\nWrong selection, enter again.\n")
         else:
-            print(" Wrong selection, enter again. ")
+            print("\nInvalid input! Try again.\n")
 
 if __name__ == "__main__":
     menu()
