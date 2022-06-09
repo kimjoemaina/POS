@@ -27,7 +27,7 @@ def purchase_operations():
     while True:
         print("  ***** Purchase Operations *****")
         print("  [1] Sell")
-        print("  [2] View customer transactions.")
+        print("  [2] View customer transactions")
         print("  [3] Main Menu")
 
         selection = int(input("Select option:\n"))
@@ -57,7 +57,6 @@ def sell():
     prices_list = []
     quantity_list = []
     totals_list = []
-    transaction_id = str(random.randint(100000, 9999999))
     new_order = True
 
 
@@ -77,7 +76,8 @@ def sell():
         purchase_data = json.load(purchase_db)
 
     while new_order:
-        product_id = input("Enter product SKU:\n")
+        product_id = int(input("Enter product SKU:\n"))
+
         for i in product_data:
             if i["sku"] == product_id:
                 print(f'\nSKU: {i["sku"]}')
@@ -85,6 +85,7 @@ def sell():
                 print(f'Product Name: {i["product_name"]}')
                 print(f'Price: {i["product_price"]}\n')
 
+                transaction_id = random.randint(1000000, 9999999)
                 customer_id = customer["customer_id"]
                 customer_name = f'{customer["first_name"]} {customer["last_name"]}'
                 price = i["product_price"]
@@ -118,6 +119,7 @@ def sell():
                 
 
                 i.update({"stock_capacity": new_stock_cnt})
+                
             
 
                 confirmation = input("Would you like anything else? (Y/N)\n").upper()
@@ -126,16 +128,20 @@ def sell():
                     new_order
                 elif confirmation == "N":
                     receipt = (f'''
-                    Transaction ID: {transaction_id}
-                    Customer ID: {customer_id}
-                    Customer Name: {customer_name}
-                    Products SKU: {purchase["product_sku"]}
-                    Product Names: {purchase["product_name"]}
-                    Prices: {purchase["price"]}
-                    Quantities: {purchase["quantities"]}
-                    Date: {purchase["date"]}
-                    Totals: {purchase["totals"]}
-                    Grand Total: {purchase["grand_total"]}
+                                --------- Receipt ---------
+
+                        Transaction ID      :      {transaction_id}
+                        Customer ID         :      {customer_id}
+                        Customer Name       :      {customer_name}
+                        Products SKU        :      {purchase["product_sku"]}
+                        Product Names       :      {purchase["product_name"]}
+                        Prices              :      {purchase["price"]}
+                        Quantities          :      {purchase["quantities"]}
+                        Date                :      {purchase["date"]}
+                        Totals              :      {purchase["totals"]}
+                        Grand Total         :      {purchase["grand_total"]}
+
+                            --------- Welcome again ---------
                     ''')
 
                     print(f'\nTotal: {sum(totals_list)}\n')
@@ -146,6 +152,7 @@ def sell():
                     print(receipt)
 
                     new_order = False
+
     purchase_data.append(purchase)   
                 
                 
@@ -157,22 +164,49 @@ def sell():
 def search_transactions():
     with open(purchase_file) as purchase_db:
         purchase_data = json.load(purchase_db)
-        transaction_id = input("Enter transaction ID:\n")
+        search = input("Search using:\n[T] Transaction ID\n[A] View all transactions\n[U] Up\n").upper()
+        if search == "T":
+            transaction_id = int(input("Enter transaction ID:\n"))
+            for i in purchase_data:
+                if i["transaction_id"] == transaction_id:
+                    print(f'''
+                        ---------- Transaction Details ----------
 
-        for i in purchase_data:
-            if i["transaction_id"] == transaction_id:
+                        Transaction ID      :       {i["transaction_id"]}
+                        Customer ID         :       {i["customer_id"]}
+                        Customer Name       :       {i["customer_name"]}
+                        Products SKU        :       {i["product_sku"]}
+                        Product Names       :       {i["product_name"]}
+                        Prices              :       {i["price"]}
+                        Quantities          :       {i["quantities"]}
+                        Date                :       {i["date"]}
+                        Totals              :       {i["totals"]}
+                        Grand Total         :       {i["grand_total"]}
+
+                                ---------- End ---------                        
+                        ''')
+        elif search == "A":
+            for i in purchase_data:
                 print(f'''
-                Transaction ID: {i["transaction_id"]}
-                Customer ID: {i["customer_id"]}
-                Customer Name: {i["customer_name"]}
-                Products SKU: {i["product_sku"]}
-                Product Names: {i["product_name"]}
-                Prices: {i["price"]}
-                Quantities: {i["quantities"]}
-                Date: {i["date"]}
-                Totals: {i["totals"]}
-                Grand Total: {i["grand_total"]}
+                        Transaction ID      :       {i["transaction_id"]}
+                        Customer ID         :       {i["customer_id"]}
+                        Customer Name       :       {i["customer_name"]}
+                        Products SKU        :       {i["product_sku"]}
+                        Product Names       :       {i["product_name"]}
+                        Prices              :       {i["price"]}
+                        Quantities          :       {i["quantities"]}
+                        Date                :       {i["date"]}
+                        Totals              :       {i["totals"]}
+                        Grand Total         :       {i["grand_total"]}
                 ''')
+        elif search == "U":
+            purchase_operations()
+        else:
+            print("\nInvalid input! Exiting...\n")
+
+
+                
+
 
 if __name__ == "__main__":
     purchase_operations()
