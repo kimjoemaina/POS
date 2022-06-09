@@ -15,6 +15,7 @@ class Customer:
         self.email = email
         self.city = city
         self.reg_date = reg_date
+    
 
     def __str__(self):
         customer_info = (f"""
@@ -269,16 +270,19 @@ def update_customer():
 def view_customer():
     with open(filename) as customer_db:
         customer_data = json.load(customer_db)
-        c_ref = int(input("Enter Customer ID:\n"))
-        for i in customer_data:
-            # instance of customer class
-            c = Customer(i["customer_id"], i["first_name"], i["last_name"], i["age"], i["phone"], i["email"], i["city"], i["reg_date"])
-            d = c.__dict__
-            if d["customer_id"] == c_ref:
-                print(c)
-                return d
-        else:
-            print("\nCustomer not found!\n")
+
+    c_ref = int(input("Enter Customer ID:\n"))
+
+
+    for i in customer_data:
+        # instance of customer class
+        c = Customer(i["customer_id"], i["first_name"], i["last_name"], i["age"], i["phone"], i["email"], i["city"], i["reg_date"])
+        d = c.__dict__
+        if d["customer_id"] == c_ref:
+            print(c)
+            return d
+    else:
+        print("\nCustomer not found!\n")
             
 # 5. View customer Database
 def view_customer_db():
