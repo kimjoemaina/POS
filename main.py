@@ -27,7 +27,7 @@ def menu():
             elif selection == "4":
                 exit()
             else:
-                print("\nWrong selection, enter again.\n")
+                print("\nWrong selection. Try again.\n")
         else:
             print("\nInvalid input! Try again.\n")
 
