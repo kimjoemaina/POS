@@ -301,26 +301,26 @@ def view_customer_db():
                     sorted_by_id = sorted(customer_data, key = lambda i: i["customer_id"])
                     for s in sorted_by_id:
                         print(f'''
-                        Customer ID: {s["customer_id"]}
-                        Name: {s["first_name"]} {s["last_name"]}
-                        Age: {s["age"]}
-                        Phone: {s["phone"]}
-                        Email: {s["email"]}
-                        City: {s["city"]}
-                        Registration Date: {s["reg_date"]}
+                        Customer ID         : {s["customer_id"]}
+                        Name                : {s["first_name"]} {s["last_name"]}
+                        Age                 : {s["age"]}
+                        Phone               : {s["phone"]}
+                        Email               : {s["email"]}
+                        City                : {s["city"]}
+                        Registration Date   : {s["reg_date"]}
                         ''')
                     break
                 elif order_id == "D":
-                    sorted_by_id = sorted(customer_data, key = lambda d: d["first_name"], reverse=True)
+                    sorted_by_id = sorted(customer_data, key = lambda d: d["customer_id"], reverse=True)
                     for s in sorted_by_id:
                         print(f'''
-                        Customer ID: {s["customer_id"]}
-                        Name: {s["first_name"]} {s["last_name"]}
-                        Age: {s["age"]}
-                        Phone: {s["phone"]}
-                        Email: {s["email"]}
-                        City: {s["city"]}
-                        Registration Date: {s["reg_date"]}
+                        Customer ID         : {s["customer_id"]}
+                        Name                : {s["first_name"]} {s["last_name"]}
+                        Age                 : {s["age"]}
+                        Phone               : {s["phone"]}
+                        Email               : {s["email"]}
+                        City                : {s["city"]}
+                        Registration Date   : {s["reg_date"]}
                         ''')
                     break
                 else:
@@ -333,26 +333,26 @@ def view_customer_db():
                     sorted_by_name = sorted(customer_data, key = lambda n: n["first_name"])
                     for s in sorted_by_name:
                         print(f'''
-                        Customer ID: {s["customer_id"]}
-                        Name: {s["first_name"]} {s["last_name"]}
-                        Age: {s["age"]}
-                        Phone: {s["phone"]}
-                        Email: {s["email"]}
-                        City: {s["city"]}
-                        Registration Date: {s["reg_date"]}
+                        Customer ID         : {s["customer_id"]}
+                        Name                : {s["first_name"]} {s["last_name"]}
+                        Age                 : {s["age"]}
+                        Phone               : {s["phone"]}
+                        Email               : {s["email"]}
+                        City                : {s["city"]}
+                        Registration Date   : {s["reg_date"]}
                         ''')
                     break
                 elif order_name == "D":
                     sorted_by_name = sorted(customer_data, key = lambda n: n["first_name"], reverse=True)
                     for s in sorted_by_name:
                         print(f'''
-                        Customer ID: {s["customer_id"]}
-                        Name: {s["first_name"]} {s["last_name"]}
-                        Age: {s["age"]}
-                        Phone: {s["phone"]}
-                        Email: {s["email"]}
-                        City: {s["city"]}
-                        Registration Date: {s["reg_date"]}
+                        Customer ID         : {s["customer_id"]}
+                        Name                : {s["first_name"]} {s["last_name"]}
+                        Age                 : {s["age"]}
+                        Phone               : {s["phone"]}
+                        Email               : {s["email"]}
+                        City                : {s["city"]}
+                        Registration Date   : {s["reg_date"]}
                         ''')
                     break
                 else:
