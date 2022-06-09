@@ -25,5 +25,113 @@
             110
         ],
         "grand_total": 170
+    },
+    {
+        "transaction_id": 3775001,
+        "customer_id": 6111,
+        "customer_name": "Joe Doe",
+        "product_sku": [
+            42599,
+            64284
+        ],
+        "product_name": [
+            "Milk",
+            "Hb pencils"
+        ],
+        "price": [
+            55,
+            20
+        ],
+        "quantities": [
+            3,
+            3
+        ],
+        "date": "08/06/2022",
+        "totals": [
+            165,
+            60
+        ],
+        "grand_total": 225
+    },
+    {
+        "transaction_id": 8368470,
+        "customer_id": 6111,
+        "customer_name": "Joe Doe",
+        "product_sku": [
+            42599,
+            85426
+        ],
+        "product_name": [
+            "Milk",
+            "Akala"
+        ],
+        "price": [
+            55,
+            150
+        ],
+        "quantities": [
+            1,
+            2
+        ],
+        "date": "08/06/2022",
+        "totals": [
+            55,
+            300
+        ],
+        "grand_total": 355
+    },
+    {
+        "transaction_id": 9291312,
+        "customer_id": 6111,
+        "customer_name": "Joe Doe",
+        "product_sku": [
+            42599,
+            64284
+        ],
+        "product_name": [
+            "Milk",
+            "Hb pencils"
+        ],
+        "price": [
+            55,
+            20
+        ],
+        "quantities": [
+            2,
+            3
+        ],
+        "date": "08/06/2022",
+        "totals": [
+            110,
+            60
+        ],
+        "grand_total": 170
+    },
+    {
+        "transaction_id": 2824089,
+        "customer_id": 2893,
+        "customer_name": "Jane Mwakideu",
+        "product_sku": [
+            66565,
+            33987
+        ],
+        "product_name": [
+            "Bread",
+            "Sugar"
+        ],
+        "price": [
+            55,
+            150
+        ],
+        "quantities": [
+            2,
+            1
+        ],
+        "date": "09/06/2022",
+        "totals": [
+            110,
+            150
+        ],
+        "grand_total": 260
     }
 ]
