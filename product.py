@@ -91,7 +91,7 @@ def add_new_item():
         vendor_phone = input("Vendor Phone No.:\n")
 
         while True:
-            items_in_stock = input("No of items (NUMBERS ONLY. NO SPECIAL CHARACTERS):\n")
+            items_in_stock = input("No. of items (NUMBERS ONLY. NO SPECIAL CHARACTERS):\n")
             try:
                 stock_value = int(items_in_stock)
                 break
