@@ -529,7 +529,7 @@ def view_customer_db():
             Wrong selection! Exiting...
             ''')
                 break
-                    
+# Query no of customers in db                    
 def query_no_of_customers():
     with open (filename) as customer_db:
         customer_data = json.load(customer_db)
