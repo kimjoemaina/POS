@@ -12,6 +12,9 @@ def menu():
                     2 : Product Operations
                     3 : Purchase Operations
                     4 : Exit
+
+                    ---------- End ----------
+    
         ''')
 
         try:
@@ -30,9 +33,10 @@ def menu():
                 break
             elif selection == 4:
                 exit()
+                break
             else:
                 print('''
-        Wrong selection. Try again.
+        Invalid selection. Try again.
                 ''')
         except ValueError:
             print('''
