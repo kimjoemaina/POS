@@ -67,13 +67,12 @@ def customer_menu():
                 customer_menu() 
             elif selection == 5:
                 view_customer_db()
-                # customer_menu()
             elif selection == 6:
                 query_no_of_customers()    
             elif selection == 7:
                 from main import menu
                 menu()
-            
+
             else:
                 print('''
         Invalid selection! Please try again.
@@ -82,6 +81,7 @@ def customer_menu():
             print('''
         Invalid input! Please enter a valid value.
         ''')
+        break
 
 # 1. Add customer to JSON file
 def add_customer():
@@ -419,7 +419,6 @@ def view_customer():
             print('''
             Invalid input! Try again.
             ''')
-
 
     for i in customer_data:
         # instance of customer class
