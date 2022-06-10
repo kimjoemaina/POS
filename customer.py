@@ -51,9 +51,7 @@ def customer_menu():
         ''')
     
         try:
-            selection = int(input('''
-        Enter your choice:\n
-        '''))
+            selection = int(input("\n\tEnter your choice:\n\t"))
             if selection == 1:
                 add_customer()
                 customer_menu()
@@ -74,39 +72,21 @@ def customer_menu():
                 menu()
 
             else:
-                print('''
-        Invalid selection! Please try again.
-        ''')
+                print("\n\tInvalid selection! Please try again.\t\t")
         except:
-            print('''
-        Invalid input! Please enter a valid value.
-        ''')
-        break
+            print("\n\tInvalid input! Please enter a valid value.\t\t")
 
 # 1. Add customer to JSON file
 def add_customer():
     with open(filename) as customer_db:
         customer_data = json.load(customer_db)
         customer_id = random.randint(1000, 9999)
-        first_name = input('''
-        First Name:\n
-        '''
-        ).capitalize()
-        last_name = input('''
-        Last Name:\n
-        ''').capitalize()
-        age = input('''
-        Age:\n
-        ''')
-        phone_no = input('''
-        Phone No.:\n
-        ''')
-        email = input('''
-        Email:\n
-        ''')
-        city = input('''
-        City of Residence:\n
-        ''').capitalize()
+        first_name = input("\n\tFirst Name:\n\t").capitalize()
+        last_name = input("\n\tLast Name:\n\t").capitalize()
+        age = input("\n\tAge:\n\t")
+        phone_no = input("\n\tPhone No.:\n\t")
+        email = input("\n\tEmail:\n\t")
+        city = input("\n\tCity of Residence:\n\t").capitalize()
         registration_date = datetime.now()
         date = registration_date.strftime("%d/%m/%Y")
 
@@ -117,9 +97,7 @@ def add_customer():
         
     with open(filename, "w") as f:
         json.dump(customer_data, f, indent=4)
-    print(f'''
-        Customer {customer_id} added successfully!
-        ''')
+    print(f"\n\tCustomer {customer_id} added successfully!\n\t")
 
 
 # 2. Delete customer from JSON File
@@ -128,49 +106,31 @@ def delete_customer():
         customer_data = json.load(customer_db)
         while True:
             try:
-                c_ref = int(input('''
-                Enter Customer ID (Numbers only):\n
-                '''))
+                c_ref = int(input("\n\tEnter Customer ID (Numbers only):\n\t"))
                 j = 0
                 # iterate over customer_data list
                 for i in customer_data:
                     if i["customer_id"] == c_ref:
                         for key, value in i.items():
-                            print('''
-                            {} : {}'''.format(key, value))
-                        warning = input('''
-                        Are you sure?
-                        ***THIS ACTION IS IRREVERSIBLE*** (Y/N)
-                        ''').upper()
+                            print("\t{} : {}\t".format(key, value))
+                        warning = input("\n\tAre you sure?***THIS ACTION IS IRREVERSIBLE*** (Y/N)\n\t").upper()
                         if warning == "Y":
                             customer_data.pop(j)
-                            print(f'''
-                        Customer {c_ref} deleted successfully!\n
-                            ''')
+                            print(f"\n\tCustomer {c_ref} deleted successfully!\n\t")
                             break
                         elif warning == "N":
-                            print('''
-                        No changes made!\n
-                            ''')
+                            print("\n\tNo changes made!\n\t")
                             break
                         else:
-                            print('''
-                        Invalid input! Exiting...
-                            ''')
+                            print("\n\tInvalid input! Exiting...\n\t")
                             break
                     j += 1
                 else:
-                    print('''
-                    Customer not found!
-                    ''')
+                    print("\n\tCustomer not found!\n\t")
                 break
             except ValueError:
-                print('''
-                Invalid input. Please enter a valid value.
-            ''')
+                print("\n\tInvalid input. Please enter a valid value.\n\t")
             
-
-
     with open(filename, "w") as f:
         json.dump(customer_data, f, indent=4)
                
@@ -181,14 +141,10 @@ def update_customer():
         customer_data = json.load(customer_db)
         while True:   
             try: 
-                update_c = int(input('''
-                    Which customer would you like to update?
-                    Enter Customer ID:
-                    '''))
+                update_c = int(input("\n\tWhich customer would you like to update?\n\tEnter Customer ID:\n\t"))
                 break
             except ValueError:
-                print('''
-                    Invalid input.\n''')
+                print("\n\tInvalid input.\n")
 
         for i in customer_data:            
             c = Customer(i["customer_id"], i["first_name"], i["last_name"], i["age"], i["phone"], i["email"], i["city"], i["reg_date"])
@@ -207,198 +163,122 @@ def update_customer():
                     ''')
 
                 # update attribute
-                update_a = int(input('''
-                    Which attribute you like to update?
-                    '''
-                ))
+                while True:
+                    try:
+                        update_a = int(input("\n\tWhich attribute you like to update?\n\t"))
+                        break
+                    except ValueError:
+                        print("\n\tInvalid value. Try again.\n\t")
                 # Customer ID update
                 if update_a == 1:
                     new_id = random.randint(1000,9999)
-                    confirm = input('''
-                    Are you sure of this action? (Y/N)
-                    *** THIS ACTION IS IRREVERSIBLE! ***
-                    ''').upper()
+                    confirm = input('\n\tAre you sure of this action? (Y/N)\n\t*** THIS ACTION IS IRREVERSIBLE! ***\n\t').upper()
                     if confirm == "Y":
                         i["customer_id"] = new_id
-                        print(f'''
-                    Customer updated successfully! New ID: {new_id}.''')
+                        print(f"\n\tCustomer updated successfully! New ID: {new_id}.\n\t")
                         break
                     elif confirm == "N":
-                        print('''
-                    No changes made!
-                    ''')
+                        print("\n\tNo changes made!\n\t")
                         break
                     else:
-                        print('''
-                    Invalid input!
-                        ''')
+                        print("\n\tInvalid input!\n\t")
                         break
                 # Customer First Name update
                 elif update_a == 2:
-                    new_first_name = input('''
-                    Enter new first name:
-                    ''').capitalize()
+                    new_first_name = input("\n\tEnter new first name:\"").capitalize()
 
-                    confirm = input('''
-                    Are you sure of this action? (Y/N)
-                    *** THIS ACTION IS IRREVERSIBLE! ***
-                    ''').upper()
+                    confirm = input("\n\tAre you sure of this action? (Y/N)\"*** THIS ACTION IS IRREVERSIBLE! ***\n\t").upper()
 
                     if confirm == "Y":
                         i["first_name"] = new_first_name
-                        print(f'''
-                    Customer updated successfully! New first name: {new_first_name}.
-                    ''')
+                        print(f"\n\tCustomer updated successfully! New first name: {new_first_name}.\n\t")
                         break
                     elif confirm == "N":
-                        print('''
-                    No changes made!
-                    ''')
+                        print("\n\tNo changes made!\n\t")
                         break
                     else:
-                        print('''
-                    Invalid input!
-                    ''')
+                        print("\n\tInvalid input!\n\t")
                         break
 
                 # Customer last name update
                 elif update_a == 3:
-                    new_last_name = input('''
-                    Enter new last name:
-                    ''').capitalize()
-                    confirm = input('''
-                    Are you sure of this action? (Y/N)
-                    *** THIS ACTION IS IRREVERSIBLE! ***
-                    ''').upper()
+                    new_last_name = input("\n\tEnter new last name:\"").capitalize()
+                    confirm = input("\n\tAre you sure of this action? (Y/N)\n\t*** THIS ACTION IS IRREVERSIBLE! ***\n\t").upper()
                     if confirm == "Y":
                         i["last_name"] = new_last_name
-                        print(f'''
-                    Customer updated successfully! New last name: {new_last_name}.
-                    ''')
+                        print(f"\n\tCustomer updated successfully! New last name: {new_last_name}.\n\t")
                         break
                     elif confirm == "N":
-                        print('''
-                    No changes made!
-                    ''')
+                        print("\n\tNo changes made!\n\t")
                         break
                     else:
-                        print('''
-                    Invalid input!
-                    ''')
+                        print("\n\tInvalid input!\n\t")
                         break
 
                 # Customer age update
                 elif update_a == 4:
-                    new_age = input('''
-                    Enter new age:
-                    '''
-                    )
-                    confirm = input('''
-                    Are you sure of this action? (Y/N)
-                    *** THIS ACTION IS IRREVERSIBLE! ***
-                    ''').upper()
+                    new_age = input("\n\tEnter new age:\n\t")
+                    confirm = input("Are you sure of this action? (Y/N)\n\t*** THIS ACTION IS IRREVERSIBLE! ***\n\t").upper()
                     if confirm == "Y":
                         i["age"] = new_age
-                        print(f'''
-                    Customer updated successfully! New age: {new_age}.
-                    ''')
+                        print(f"\n\tCustomer updated successfully! New age: {new_age}.\n\t")
                         break
                     elif confirm == "N":
-                        print('''
-                    No changes made!
-                    ''')
+                        print("\n\tNo changes made!\n\t")
                         break 
                     else:
-                        print('''
-                    Invalid input
-                    ''')
+                        print("\n\tInvalid input\n\t")
                         break
 
                 # Customer Phone No. update
                 elif update_a == 5:
-                    new_phone_no = input('''
-                    Enter new phone number:
-                    ''')
-                    confirm = input('''Are you sure of this action? (Y/N)
-                    *** THIS ACTION IS IRREVERSIBLE! ***
-                    ''').upper()
+                    new_phone_no = input('\n\tEnter new phone number:\n\t')
+                    confirm = input("\n\tAre you sure of this action? (Y/N)\n\t*** THIS ACTION IS IRREVERSIBLE! ***\n\t").upper()
                     if confirm == "Y":
                         i["phone"] == new_phone_no
-                        print(f'''
-                    Customer updated successfully! New Phone No.: {new_phone_no}.
-                    ''')
+                        print(f'\n\tCustomer updated successfully! New Phone No.: {new_phone_no}.\n\t')
                         break
                     elif confirm == "N":
-                        print('''
-                    No changes made!
-                    ''')
+                        print("\n\tNo changes made!\n\t")
                         break
                     else:
-                        print('''
-                    Invalid input!
-                    ''')
+                        print("\n\tInvalid input!\n\t")
                         break
 
                 # Customer email update
                 elif update_a == 6:
-                    new_email = input('''
-                    Enter new email:
-                    ''')
-                    confirm = input('''
-                    Are you sure of this action? (Y/N)
-                    *** THIS ACTION IS IRREVERSIBLE! ***
-                    ''').upper()
+                    new_email = input("\n\tEnter new email:\n\t")
+                    confirm = input("\n\tAre you sure of this action? (Y/N)\n\t*** THIS ACTION IS IRREVERSIBLE! ***\n\t").upper()
                     if confirm == "Y":
                         i["email"] = new_email
-                        print(f'''
-                    Customer updated successfully! New email: {new_email}.
-                    ''')
+                        print(f"Customer updated successfully! New email: {new_email}.\n\t")
                         break
                     elif confirm == "N":
-                        print('''
-                    No changes made!
-                    ''')
+                        print("\n\tNo changes made!\n\t")
                         break
                     else:
-                        print('''
-                    Invalid input!
-                    ''')
+                        print("\n\tInvalid input!\n\t")
                         break
 
                 # Customer city update
                 elif update_a == 7:
-                    new_city = input('''
-                    Enter new city:
-                    ''')
-                    confirm = input('''
-                    Are you sure of this action? (Y/N)
-                    *** THIS ACTION IS IRREVERSIBLE! ***
-                    ''').upper()
+                    new_city = input("\n\tEnter new city:\n\t")
+                    confirm = input("\n\tAre you sure of this action? (Y/N)\n\t*** THIS ACTION IS IRREVERSIBLE! ***\n\t").upper()
                     if confirm == "Y":
                         i["city"] = new_city
-                        print(f'''
-                    Customer updated successfully! New city: {new_city}.
-                    ''')
+                        print(f"\n\tCustomer updated successfully! New city: {new_city}.\n\t")
                         break
                     elif confirm == "N":
-                        print('''
-                    No changes made!
-                    ''')
+                        print("\n\tNo changes made!\n\t")
                         break
                     else:
-                        print('''
-                    Invalid input!
-                    ''')
+                        print("\n\tInvalid input!\n\t")
                         break
                 else:
-                    print('''
-                    Invalid entry. Try again!
-                    ''')
+                    print("\n\tInvalid entry. Try again!\n\t")
                     break
         else:
-            print('''
-                    Customer not found!
-                    ''')
+            print("\n\tCustomer not found!\n\t")
                     
     with open(filename, "w") as f:
         json.dump(customer_data, f, indent=4)
@@ -411,14 +291,10 @@ def view_customer():
 
     while True:
         try:
-            c_ref = int(input('''
-            Enter Customer ID:
-            '''))
+            c_ref = int(input("\n\tEnter Customer ID:\n\t"))
             break
         except ValueError:
-            print('''
-            Invalid input! Try again.
-            ''')
+            print("\n\tInvalid input! Try again.\n\t")
 
     for i in customer_data:
         # instance of customer class
@@ -428,9 +304,7 @@ def view_customer():
             print(c)
             return d
     else:
-        print('''
-            Customer not found!
-            ''')
+        print("\n\tCustomer not found!\n\t")
             
 # 5. View customer Database
 def view_customer_db():
@@ -439,28 +313,19 @@ def view_customer_db():
 
         while True:
             try:
-                view_query = int(input('''
-            [1] View All
-            [2] Sort by Customer ID
-            [3] Sort by Name
-            '''))
+                view_query = int(input("\n\t[1] View All\n\t[2] Sort by Customer ID\n\t[3] Sort by Name\n\t"))
                 break
             except ValueError:
-                print('''
-            Invalid input. Try again!
-            ''')
-       
+                print("\n\tInvalid input. Try again!\n\t")
+
+        if customer_data == []:
+            print("\n\tNo customers found in database.\n\t")
         for i in customer_data:
             c = Customer(i["customer_id"], i["first_name"], i["last_name"], i["age"], i["phone"], i["email"], i["city"], i["reg_date"])
             if view_query == 1:
                 print(c)
             elif view_query == 2:
-                order_id = input('''
-                Sort:
-                [A] Ascending
-                [D] Descending
-                (Enter A/D)
-                ''').upper()
+                order_id = input("\n\tSort:\n\t[A] Ascending\n\t[D] Descending\n\t(Enter A/D)\n\t").upper()
                 if order_id == "A":
                     sorted_by_id = sorted(customer_data, key = lambda i: i["customer_id"])
                     for s in sorted_by_id:
@@ -488,9 +353,7 @@ def view_customer_db():
                         ''')
                     break
                 else:
-                    print('''
-                Invalid input. Try again.
-                ''')
+                    print("\n\tInvalid input. Try again.\n\t")
             elif view_query == 3:
                 order_name  = input("Sort:\n[A] Ascending\n[D] Descending\n(Enter A/D)\n").upper()
                 if order_name == "A":
@@ -520,13 +383,10 @@ def view_customer_db():
                         ''')
                     break
                 else:
-                    print('''
-                Invalid input! Try again.''')
+                    print("\n\tInvalid input! Try again.\n\t")
                     break
             else:
-                print('''
-            Wrong selection! Exiting...
-            ''')
+                print("\n\tWrong selection! Exiting...\n\t")
                 break
 # Query no of customers in db                    
 def query_no_of_customers():
@@ -536,9 +396,7 @@ def query_no_of_customers():
 
         for i in customer_data:
             j += 1
-        print(f'''
-        There are {j} customers in the database!
-        ''')
+        print(f"\n\tThere are {j} customers in the database!\n\t")
     
     
 
