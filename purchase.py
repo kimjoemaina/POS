@@ -36,15 +36,9 @@ def purchase_operations():
         ''')
         
         try:
-            selection = int(input('''
-            Select option:
-            '''))
+            selection = int(input("\n\tSelect option:\n\t"))
             if selection == 1:
-                check = input('''
-                New or existing customer?
-                [N] New
-                [E] Existing
-                ''').upper()
+                check = input("\n\tNew or existing customer?\n\t[N] New\n\t[E] Existing\n\t").upper()
                 if check == "N":
                     new_customer = add_customer()
                 elif check == "E":
@@ -52,9 +46,7 @@ def purchase_operations():
                     purchase_operations()
                     break
                 else:
-                    print('''
-                    Invalid input!
-                    Try again.''')
+                    print("\n\tInvalid input!\n\tTry again.\n\t")
             elif selection == 2:
                 search_transactions()
             elif selection == 3:
@@ -62,13 +54,9 @@ def purchase_operations():
                 menu()
                 break
             else:
-                print('''
-                Invalid selection! Try again.
-                ''')
+                print("\n\tInvalid selection! Try again.\n\t")
         except:
-            print('''
-            Invalid value. Try again.
-            ''')
+            print("\n\tInvalid value. Try again.\n\t")
 
 
 def sell():
@@ -89,27 +77,18 @@ def sell():
 
     with open(products) as product_db:
         product_data = json.load(product_db)
-        print('''
-        What would you like to sell?
-        ''')
+        print("\n\tWhat would you like to sell?\n\t")
         
 
     with open(purchase_file) as purchase_db:
         purchase_data = json.load(purchase_db)
 
     while new_order:
-        product_id = int(input('''
-        Enter product SKU:
-        '''))
+        product_id = int(input("\n\tEnter product SKU:\n\t"))
 
         for i in product_data:
             if i["sku"] == product_id:
-                print(f'''
-                SKU: {i["sku"]}
-                Product Category: {i["product_category"]}
-                Product Name: {i["product_name"]}
-                Price: {i["product_price"]}
-                ''')
+                print(f'\n\tSKU: {i["sku"]}\n\tProduct Category: {i["product_category"]}\n\tProduct Name: {i["product_name"]}\n\tPrice: {i["product_price"]}\n\t')
                 transaction_id = random.randint(1000000, 9999999)
                 customer_id = customer["customer_id"]
                 customer_name = f'{customer["first_name"]} {customer["last_name"]}'
@@ -117,13 +96,9 @@ def sell():
                 prod_sku = i["sku"]
                 prod_name = (i["product_name"])
                 while True:
-                    quantity = int(input('''
-                Quantity (QTY):
-                '''))
+                    quantity = int(input('\n\tQuantity (QTY):\n\t'))
                     if quantity > i["stock_capacity"]:
-                        print(f'''
-                        Quantity entered exceeds stock available.
-                        Available Quantity: {i["stock_capacity"]}.''')
+                        print(f'\n\tQuantity entered exceeds stock available.\n\tAvailable Quantity: {i["stock_capacity"]}.\n\t')
                     elif quantity < i["stock_capacity"]:
                         break
                 
@@ -151,9 +126,7 @@ def sell():
                 
             
 
-                confirmation = input('''
-                Would you like anything else? (Y/N)
-                ''').upper()
+                confirmation = input("\n\tWould you like anything else? (Y/N)\n\t").upper()
 
                 if confirmation == "Y":
                     new_order
@@ -175,23 +148,15 @@ def sell():
                             --------- Welcome again ---------
                     ''')
 
-                    print(f'''
-                    Total: {sum(totals_list)}
-                    ''')
+                    print(f"\n\tTotal: {sum(totals_list)}\n\t")
                     while True:
                         try:
-                            cash_given = int(input('''
-                        Amount Tendered (Ksh):
-                        '''))
+                            cash_given = int(input("\n\tAmount Tendered (Ksh):\n\t"))
                             break
                         except:
-                            print('''
-                        Invalid value! Try again.
-                        ''')
+                            print("\n\tInvalid value! Try again.\n\t")
                     change = cash_given - sum(totals_list)
-                    print(f'''
-                        Change: Ksh. {change}
-                        ''')
+                    print(f"\n\tChange: Ksh. {change}\n\t")
                     print(receipt)
 
                     new_order = False
@@ -207,9 +172,14 @@ def sell():
 def search_transactions():
     with open(purchase_file) as purchase_db:
         purchase_data = json.load(purchase_db)
-        search = input("Search using:\n[T] Transaction ID\n[A] View all transactions\n[U] Up\n").upper()
+        search = input("\n\tSearch using:\n\t[T] Transaction ID\n\t[A] View all transactions\n\t[U] Up\n\t").upper()
         if search == "T":
-            transaction_id = int(input("Enter transaction ID:\n"))
+            while True:
+                try:
+                    transaction_id = int(input("\n\tEnter transaction ID:\n\t"))
+                    break
+                except ValueError:
+                    print("\n\tInvalid transaction ID. Try again.\n\t")
             for i in purchase_data:
                 if i["transaction_id"] == transaction_id:
                     print(f'''
@@ -245,7 +215,7 @@ def search_transactions():
         elif search == "U":
             purchase_operations()
         else:
-            print("\nInvalid input! Exiting...\n")
+            print("\n\tInvalid input! Exiting...\n\t")
 
 if __name__ == "__main__":
     purchase_operations()
