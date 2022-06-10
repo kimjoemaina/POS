@@ -14,14 +14,10 @@ def menu():
                     4 : Exit
 
                     ---------- End ----------
-    
         ''')
 
         try:
-            selection = int(input('''
-        Enter your choice:
-        '''
-            ))
+            selection = int(input('\t\tEnter your choice:\n\t\t'))
             if selection == 1:
                 customer_menu()
                 break
@@ -34,14 +30,9 @@ def menu():
             elif selection == 4:
                 break
             else:
-                print('''
-        Invalid selection. Try again.
-                ''')
+                print("\n\t\tInvalid selection. Try again.\n")
         except ValueError:
-            print('''
-        Invalid input! Please enter a valid value.
-        ''') 
-        break
+            print("\n\t\tInvalid input! Please enter a valid value.\n") 
 
 if __name__ == "__main__":
     menu()
