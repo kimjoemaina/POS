@@ -4,32 +4,44 @@ from purchase import purchase_operations
 
 def menu():
     while True:
-        print("***** Welcome to the POS *****")
-        print("***** Please select a menu ******")
-        print(" 1 : Customer Operations")
-        print(" 2 : Product Operations")
-        print(" 3 : Purchase Operations")
-        print(" 4 : Exit")
+        print('''
+        --------------- Welcome to the POS -------------
+                ---------- Select a Menu ----------
 
+                    1 : Customer Operations
+                    2 : Product Operations
+                    3 : Purchase Operations
+                    4 : Exit
+        ''')
 
-        selection = input("Enter your choice:\n")
-
-        if selection.isdigit():
-            if selection == "1":
+        try:
+            selection = int(input('''
+        Enter your choice:
+        '''
+            ))
+            if selection == 1:
                 customer_menu()
                 break
-            elif selection == "2":
+            elif selection == 2:
                 product_menu()
                 break
-            elif selection == "3":
+            elif selection == 3:
                 purchase_operations()
                 break
-            elif selection == "4":
+            elif selection == 4:
                 exit()
             else:
-                print("\nWrong selection. Try again.\n")
-        else:
-            print("\nInvalid input! Try again.\n")
+                print('''
+        Wrong selection. Try again.
+                ''')
+        except ValueError:
+            print('''
+        Invalid input! Please enter a valid value.
+        ''')
+
+        
+            
+        
 
 if __name__ == "__main__":
     menu()
