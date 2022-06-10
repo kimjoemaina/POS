@@ -28,7 +28,7 @@ def menu():
                 purchase_operations()
                 break
             elif selection == 4:
-                break
+                exit()
             else:
                 print("\n\t\tInvalid selection. Try again.\n")
         except ValueError:
