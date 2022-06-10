@@ -82,54 +82,34 @@ def product_menu():
                 menu()
                 break
             else:
-                print('''
-        Invalid selection! Please try again.
-        ''')
+                print("\n\tInvalid selection! Please try again.\n\t")
         except ValueError:
-            print('''
-        Invalid input. Try again.
-        ''')
+            print("\n\tInvalid input. Try again.\n\t")
 
 # 1. Add product to database
 def add_new_item():
     with open(filename) as product_db:
         product_data = json.load(product_db)
         sku_generator = random.randint(10000, 99999)
-        product_category = input('''
-        Product category:
-        ''').capitalize()
-        product_name = input('''
-        Product Name:
-        ''').capitalize()
+        product_category = input("\n\tProduct category:\n\t").capitalize()
+        product_name = input("\n\tProduct Name:\n\t").capitalize()
         
         while True:
             try:
-                product_price = int(input('''
-        Product price (NUMBERS ONLY. NO SPECIAL CHARACTERS):
-        '''))
+                product_price = int(input("\n\tProduct price (NUMBERS ONLY. NO SPECIAL CHARACTERS):\n\t"))
                 break
             except ValueError:
-                print('''
-        Invalid input! Try again.
-        ''')
+                print("\n\tInvalid input! Try again.\n\t")
         
-        vendor = input('''
-        Vendor:
-        ''').capitalize()
-        vendor_phone = input('''
-        Vendor Phone No.:
-        ''')
+        vendor = input("\n\tVendor:\n\t").capitalize()
+        vendor_phone = input("\n\tVendor Phone No.:\n\t")
 
         while True:
             try:
-                items_in_stock = int(input('''
-        No. of items (NUMBERS ONLY. NO SPECIAL CHARACTERS):
-        '''))
+                items_in_stock = int(input("\n\tNo. of items (NUMBERS ONLY. NO SPECIAL CHARACTERS):\n\t"))
                 break
             except:
-                print('''
-        Invalid input! Try again.
-        ''')
+                print("\n\tInvalid input! Try again.\n\t")
 
         new_product = Product(sku_generator, product_category, product_name, product_price, vendor, vendor_phone, items_in_stock)
         p_details = new_product.__dict__
@@ -137,9 +117,7 @@ def add_new_item():
     
     with open(filename, "w") as f:
         json.dump(product_data, f, indent=4)
-    print(f'''
-        Product {sku_generator} added successfully!
-        ''')
+    print(f"\n\tProduct {sku_generator} added successfully!\n\t")
 
 # 2. Delete product from database
 def delete_item():
@@ -147,12 +125,10 @@ def delete_item():
         product_data = json.load(product_db)
         while True:
             try:
-                p_ref = int(input('''
-                Enter product SKU:
-                '''))
+                p_ref = int(input("\n\tEnter product SKU:\n\t"))
                 break
             except ValueError:
-                print("Invalid value. Try again.")
+                print("\n\tInvalid value. Try again.\n\t")
 
         j = 0
 
@@ -160,32 +136,21 @@ def delete_item():
         for i in product_data:
             if i["sku"] == p_ref:
                 for key, value in i.items():
-                    print("{} : {}".format(key, value))
-                warning = input('''
-                Are you sure?
-                ***THIS ACTION IS IRREVERSIBLE*** (Y/N)
-                ''').upper()
+                    print("\t{} : {}\t".format(key, value))
+                warning = input("\n\tAre you sure?\n\t***THIS ACTION IS IRREVERSIBLE*** (Y/N)\n\t").upper()
                 if warning == "Y":
                     product_data.pop(j)
-                    print(f'''
-                Product {p_ref} deleted successfully!
-                ''')
+                    print(f"\n\tProduct {p_ref} deleted successfully!\n\t")
                     break
                 elif warning == "N":
-                    print('''
-                No changes made!
-                ''')
+                    print("\n\tNo changes made!\n\t")
                     break
                 else:
-                    print('''
-                Invalid input!
-                ''')
+                    print("\n\tInvalid input!\n\t")
                     break
             j += 1
         else:
-            print('''
-            Product not found!
-            ''')
+            print("\n\tProduct not found!\n\t")
             
 
     with open(filename, "w") as f:
@@ -199,15 +164,10 @@ def update_product():
 
         while True:
             try:
-                update_p = int(input('''
-            Which product would you like to update?
-            Enter product SKU:
-            '''))
+                update_p = int(input("\n\tWhich product would you like to update?\n\tEnter product SKU:\n\t"))
                 break
             except:
-                print('''
-            Invalid value. Try again!
-            ''')
+                print("\n\tInvalid value. Try again!\n\t")
 
         for i in product_data:
             p = Product(i["sku"], i["product_category"], i["product_name"], i["product_price"], i["product_vendor"], i["vendor_phone"], i["stock_capacity"])
@@ -228,287 +188,169 @@ def update_product():
                 # update attribute
                 while True:
                     try:
-                        update_a = int(input('''
-                Which attribute would you like to update?
-                '''))
+                        update_a = int(input("\n\tWhich attribute would you like to update?\n\t"))
                         break
                     except ValueError:
-                        print('''
-                Invalid Value. Try again.
-                ''')
+                        print("\n\tInvalid Value. Try again.\n\t")
                 # Product SKU update
                 if update_a == 1:
                     new_sku = random.randint(10000, 99999)
-                    confirm = input('''
-                    Are you sure of this action? (Y/N)
-                    *** THIS ACTION IS IRREVERSIBLE! ***
-                    ''').upper()
+                    confirm = input("\n\tAre you sure of this action? (Y/N)\n\t*** THIS ACTION IS IRREVERSIBLE! ***\n\t").upper()
                     if confirm == "Y":
                         i["sku"] = new_sku
-                        print(f'''
-                        Product updated successfully! New SKU: {new_sku}.
-                        ''')
+                        print(f"\n\tProduct updated successfully! New SKU: {new_sku}.\n\t")
                         break
                     elif confirm == "N":
-                        print('''
-                        No changes made!
-                        ''')
+                        print("\n\tNo changes made!\n\t")
                         break
                     else:
-                        print('''
-                        Invalid input!
-                        ''')
+                        print("\n\tInvalid input!\n\t")
                         break
                 # Product category update
                 if update_a == 2:
-                    new_pc = input('''
-                    Enter new category:
-                    ''').capitalize()
-                    confirm = input('''
-                    Are you sure of this action? (Y/N)
-                    *** THIS ACTION IS IRREVERSIBLE! ***
-                    ''').upper()
+                    new_pc = input("\n\tEnter new category:\n\t").capitalize()
+                    confirm = input("\n\tAre you sure of this action? (Y/N)\n\t*** THIS ACTION IS IRREVERSIBLE! ***\n\t").upper()
                     if confirm == "Y":
                         i["product_category"] = new_pc
-                        print(f'''
-                        Product updated successfully! New product category: {new_pc}.
-                        ''')
+                        print(f"\n\tProduct updated successfully! New product category: {new_pc}.\n\t")
                         break
                     elif confirm == "N":
-                        print('''
-                        No changes made!
-                        ''')
+                        print("\n\tNo changes made!\n\t")
                         break
                     else:
-                        print('''
-                        Invalid input!
-                        ''')
+                        print("\n\tInvalid input!\n\t")
                         break
                 
                 # Product name update
                 if update_a == 3:
-                    new_pn = input('''
-                    Enter new name:
-                    ''').capitalize()
-                    confirm = input('''
-                    Are you sure of this action? (Y/N)
-                    *** THIS ACTION IS IRREVERSIBLE! ***
-                    ''').upper()
+                    new_pn = input("\n\tEnter new name:\n\t").capitalize()
+                    confirm = input("\n\tAre you sure of this action? (Y/N)\n\t*** THIS ACTION IS IRREVERSIBLE! ***\n\t").upper()
                     if confirm == "Y":
                         i["product_name"] = new_pn
-                        print(f'''
-                        Product updated successfully! New name:{new_pn}.
-                        ''')
+                        print(f"\n\tProduct updated successfully! New name:{new_pn}.\n\t")
                         break
                     elif confirm == "N":
-                        print('''
-                        No changes made!
-                        ''')
+                        print("\n\tNo changes made!\n\t")
                         break
                     else:
-                        print('''
-                        Invalid input!
-                        ''')
+                        print("\n\tInvalid input!\n\t")
                         break
                 
                 # Product price update
                 if update_a == 4:
-                    new_pp = input('''
-                    Enter new price:
-                    (NUMBERS ONLY. NO SPECIAL CHARACTERS)
-                    ''')
-                    confirm = input('''
-                    Are you sure of this action? (Y/N)
-                    *** THIS ACTION IS IRREVERSIBLE! ***
-                    ''').upper()
+                    new_pp = input("\n\tEnter new price:\n\t(NUMBERS ONLY. NO SPECIAL CHARACTERS)\n\t")
+                    confirm = input("\n\tAre you sure of this action? (Y/N)\n\t*** THIS ACTION IS IRREVERSIBLE! ***\n\t").upper()
                     if confirm == "Y":
                         i["product_price"] = new_pp
-                        print(f'''
-                        Product updated successfully! New price: {new_pp}.
-                        ''')
+                        print(f"\n\tProduct updated successfully! New price: {new_pp}.\n\t")
                         break
                     elif confirm == "N":
-                        print('''
-                        No changes made!
-                        ''')
+                        print('\n\tNo changes made!\n\t')
                         break
                     else:
-                        print('''
-                        Invalid input!
-                        ''')
+                        print("\n\tInvalid input!\n\t")
                         break
 
                 # Product vendor update
                 if update_a == 5:
-                    new_pv = input('''
-                    Enter new vendor:
-                    ''').capitalize()
-                    confirm = input('''
-                    Are you sure of this action? (Y/N)
-                    *** THIS ACTION IS IRREVERSIBLE! ***
-                    ''').upper()
+                    new_pv = input("\n\tEnter new vendor:\n\t").capitalize()
+                    confirm = input("\n\tAre you sure of this action? (Y/N)\n\t*** THIS ACTION IS IRREVERSIBLE! ***\n\t").upper()
                     if confirm == "Y":
                         i["product_vendor"] = new_pv
-                        print(f'''
-                        Product updated successfully! New vendor: {new_pv}.
-                        ''')
+                        print(f"\n\tProduct updated successfully! New vendor: {new_pv}.\n\t")
                         break
                     elif confirm == "N":
-                        print('''
-                        No changes made!
-                        ''')
+                        print("\n\tNo changes made!\n\t")
                         break
                     else:
-                        print('''
-                        Invalid input!
-                        ''')
+                        print("\n\tInvalid input!\n\t")
                         break
                 
                 # Vendor Phone No. update
                 if update_a == 6:
-                    new_phn = input('''
-                    Enter new Phone No.:
-                    ''')
-                    confirm = input('''Are you sure of this action? (Y/N)
-                    *** THIS ACTION IS IRREVERSIBLE! ***
-                    ''').upper()
+                    new_phn = input("\n\tEnter new Phone No.:\n\t")
+                    confirm = input("\n\tAre you sure of this action? (Y/N)\n\t*** THIS ACTION IS IRREVERSIBLE! ***\n\t").upper()
                     if confirm == "Y":
                         i["vendor_phone"] = new_phn
-                        print(f'''
-                        Product updated successfully. New Phone No.: {new_phn}
-                        ''')
+                        print(f"\n\tProduct updated successfully. New Phone No.: {new_phn}\n\t")
                         break
                     elif confirm == "N":
-                        print('''
-                        No changes made!
-                        ''')
+                        print("\n\tNo changes made!\n\t")
                         break
                     else:
-                        print('''
-                        Invalid input!
-                        ''')
+                        print("\n\tInvalid input!\n\t")
                         break
                 
                 # Stock capacity update
                 if update_a == 7:
-                    action = input('''
-                    Do you want to clear previous stock, add to existing stock,
-                    or subtract from existing stock? (C/A/S/E)
-                    [C] Clear
-                    [A] Add
-                    [S] Subtract
-                    [E] Exit
-                    ''').upper()
+                    action = input("\n\tDo you want to clear previous stock, add to existing stock,\n\tor subtract from existing stock? (C/A/S/E)\n\t[C] Clear\n\t[A] Add\n\t[S] Subtract\n\t[E] Exit\n\t").upper()
 
                     if action == "C":
                         while True:
                             try:
-                                new_sc = int(input('''
-                        New capacity:
-                        '''))
+                                new_sc = int(input("\n\tNew capacity:\n\t"))
                                 break   
                             except:
-                                print('''
-                        Invalid input. Try again.
-                        ''')
+                                print("\n\tInvalid input. Try again.\n\t")
 
-                        confirm = input('''
-                        Are you sure of this action? (Y/N)
-                        *** THIS ACTION IS IRREVERSIBLE! ***
-                        ''').upper()
+                        confirm = input("\n\tAre you sure of this action? (Y/N)\n\t*** THIS ACTION IS IRREVERSIBLE! ***\n\t").upper()
                         if confirm == "Y":
                             i["stock_capacity"] = new_sc
-                            print(f'''
-                            Product updated successfully. Stock amount: {new_sc}.
-                            ''')
+                            print(f"\n\tProduct updated successfully. Stock amount: {new_sc}.\n\t")
                             break
                         elif confirm == "N":
-                            print('''
-                            No changes made!
-                            ''')
+                            print("\n\tNo changes made!\n\t")
                             break
                         else:
-                            print('''
-                            Invalid input!
-                            ''')
+                            print("\n\tInvalid input!\n\t")
                             break
 
                     elif action == "A":
                         while True:
                             try:
-                                new_sc = int(input('''
-                        No. of items to add
-                        ***WHOLE NUMBERS ONLY***:
-                        '''))   
+                                new_sc = int(input("\n\tNo. of items to add\n\t***WHOLE NUMBERS ONLY***:\n\t"))   
                                 break
                             except ValueError:
-                                print('''
-                                Invalid value. Try again.''')
-                        confirm = input('''
-                        Are you sure of this action? (Y/N)
-                        *** THIS ACTION IS IRREVERSIBLE! ***
-                        ''').upper()
+                                print("\n\tInvalid value. Try again.\n\t")
+                        confirm = input("\n\tAre you sure of this action? (Y/N)\n\t*** THIS ACTION IS IRREVERSIBLE! ***\n\t").upper()
                         if confirm == "Y":
                             i["stock_capacity"] += new_sc
-                            print(f'''
-                            Product updated successfully! Stock capacity: {i["stock_capacity"]}.
-                            ''')
+                            print(f'\n\tProduct updated successfully! Stock capacity: {i["stock_capacity"]}.\n\t')
                             break
                         elif confirm == "N":
-                            print('''
-                            No changes made!
-                            ''')
+                            print("\n\tNo changes made!\n\t")
                             break
                         else:
-                            print('''
-                            Invalid input!
-                            ''')
+                            print("\n\tInvalid input!\n\t")
                             break
                     elif action == "S":
                         while True:
                             try:
-                                new_sc = int(input('''
-                        No. of items to remove
-                        ***WHOLE NUMBERS ONLY***:'''))
+                                new_sc = int(input("\n\tNo. of items to remove\n\t***WHOLE NUMBERS ONLY***:\n\t"))
                                 break
                             except ValueError:
-                                print("Invalid input! Try again.")
+                                print("\n\tInvalid input! Try again.\n\t")
 
-                        confirm = input('''
-                        Are you sure of this action? (Y/N)
-                        *** THIS ACTION IS IRREVERSIBLE! ***
-                        ''').upper()
+                        confirm = input("\n\tAre you sure of this action? (Y/N)\n\t*** THIS ACTION IS IRREVERSIBLE! ***\n\t").upper()
 
                         if confirm == "Y":
                             i["stock_capacity"] -= new_sc
-                            print(f'''
-                            Product updated successfully! Stock capacity: {i["stock_capacity"]}
-                            ''')
+                            print(f'\n\tProduct updated successfully! Stock capacity: {i["stock_capacity"]}\n\t')
                             break
                         elif confirm == "N":
-                            print('''
-                            No changes made!
-                            ''')
+                            print("\n\tNo changes made!\n\t")
                             break
                         else:
-                            print('''
-                            Invalid input!
-                            ''')
+                            print("\n\tInvalid input!\n\t")
                             break
                     elif action == "E":
-                        print('''
-                        Exiting...
-                        ''')
+                        print("\n\tExiting...\n\t")
                         break
                     else:
-                        print('''
-                        Invalid input!
-                        ''')
+                        print("\n\tInvalid input!\n\t")
                         break
         else:
-            print('''
-            Product not found!
-            ''')
+            print("\n\tProduct not found!\n\t")
     
     with open(filename, "w") as f:
         json.dump(product_data, f, indent=4)
@@ -519,14 +361,10 @@ def view_item():
         product_data = json.load(product_db)
         while True:
             try:
-                sku_view = int(input('''
-                Enter Product SKU:
-                '''))
+                sku_view = int(input("\n\tEnter Product SKU:\n\t"))
                 break
             except ValueError:
-                print('''
-                Invalid value. Try again.
-                ''')
+                print("\n\tInvalid value. Try again.\n\t")
         j = 0
 
         for i in product_data:
@@ -536,9 +374,7 @@ def view_item():
                 print(p)
                 return p_dict
         else:
-            print('''
-            Product not available!
-            ''')
+            print("\n\tProduct not available!\n\t")
 
 # 5. View product database
 def view_product_db():
@@ -547,27 +383,19 @@ def view_product_db():
 
         while True:
             try:
-                view = int(input('''
-                [1] View All
-                [2] Sort by Product SKU
-                [3] Sort by Product Name
-                '''))
+                view = int(input("\n\t[1] View All\n\t[2] Sort by Product SKU\n\t[3] Sort by Product Name\n\t"))
                 break
             except ValueError:
-                print('''
-                Invalid input! Try again.''')
+                print("\n\tInvalid input! Try again.\n\t")
 
+        if product_data == []:
+            print("\n\tNo products found! Database empty!\n\t")
         for i in product_data:
             p = Product(i["sku"], i["product_category"], i["product_name"], i["product_price"], i["product_vendor"], i["vendor_phone"], i["stock_capacity"])
             if view == 1:
                 print(p)
             elif view == 2:
-                order = input('''
-                Sort:
-                [A] Ascending
-                [D] Descending
-                (ENTER A/D)
-                ''').upper()
+                order = input("\n\tSort:\n\t[A] Ascending\n\t[D] Descending\n\t(ENTER A/D)\n\t").upper()
                 if order == "A":
                     sorted_by_sku  = sorted(product_data, key = lambda j: j["sku"])
                     for s in sorted_by_sku:
@@ -595,17 +423,10 @@ def view_product_db():
                             ''')
                     break
                 else:
-                    print('''
-                    Invalid input! Exiting...
-                    ''')
+                    print("\n\tInvalid input! Exiting...\n\t")
                     break
             elif view == 3:
-                prod_search = input('''
-                Sort:
-                [A] Ascending
-                [D] Descending
-                (Enter A/N)
-                ''').upper()
+                prod_search = input("\n\tSort:\n\t[A] Ascending\n\t[D] Descending\n\t(Enter A/N)\n\t").upper()
                 if prod_search == "A":
                     sorted_by_name = sorted(product_data, key = lambda n: n["product_name"])
                     for s in sorted_by_name:
@@ -633,14 +454,10 @@ def view_product_db():
                             ''')
                     break
                 else:
-                    print('''
-                    Invalid input! Exiting...
-                    ''')
+                    print("\n\tInvalid input! Exiting...\n\t")
                     break 
             else:
-                print('''
-                Invalid selection! Exiting...
-                ''')
+                print("\n\tInvalid selection! Exiting...\n\t")
                 break            
 
 # Query no of products in db
@@ -653,8 +470,6 @@ def query_no_items():
         for i in product_data:
             j += 1
         
-        print(f'''
-        There are {j} products in the database!
-        ''')
+        print(f"\n\tThere are {j} products in the database!\n\t")
 if __name__ == "__main__":
     product_menu()
