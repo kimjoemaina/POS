@@ -25,31 +25,51 @@ class Purchase:
    
 def purchase_operations():
     while True:
-        print("  ***** Purchase Operations *****")
-        print("  [1] Sell")
-        print("  [2] View customer transactions")
-        print("  [3] Main Menu")
+        print('''
+        ------------ Purchase Menu ------------
 
-        selection = int(input("Select option:\n"))
+            [1] Sell
+            [2] View customer transactions
+            [3] Main Menu
 
-        if selection == 1:
-            check = input("New or existing customer?\n[N] New\n[E] Existing\n").upper()
-            if check == "N":
-                new_customer = add_customer()
-            elif check == "E":
-                sell()
-                purchase_operations()
+            ------------ End ------------
+        ''')
+        
+        try:
+            selection = int(input('''
+            Select option:
+            '''))
+            if selection == 1:
+                check = input('''
+                New or existing customer?
+                [N] New
+                [E] Existing
+                ''').upper()
+                if check == "N":
+                    new_customer = add_customer()
+                elif check == "E":
+                    sell()
+                    purchase_operations()
+                    break
+                else:
+                    print('''
+                    Invalid input!
+                    Try again.''')
+            elif selection == 2:
+                search_transactions()
+            elif selection == 3:
+                from main import menu
+                menu()
                 break
             else:
-                print("\nInvalid input! Try again.\n")
-        elif selection == 2:
-            search_transactions()
-        elif selection == 3:
-            from main import menu
-            menu()
-            break
-        else:
-            print("\nInvalid selection! Try again.\n")
+                print('''
+                Invalid selection! Try again.
+                ''')
+        except:
+            print('''
+            Invalid value. Try again.
+            ''')
+
 
 def sell():
     product_skus = []
@@ -69,22 +89,27 @@ def sell():
 
     with open(products) as product_db:
         product_data = json.load(product_db)
-        print("What would you like to sell?\n")
+        print('''
+        What would you like to sell?
+        ''')
         
 
     with open(purchase_file) as purchase_db:
         purchase_data = json.load(purchase_db)
 
     while new_order:
-        product_id = int(input("Enter product SKU:\n"))
+        product_id = int(input('''
+        Enter product SKU:
+        '''))
 
         for i in product_data:
             if i["sku"] == product_id:
-                print(f'\nSKU: {i["sku"]}')
-                print(f'Product Category: {i["product_category"]}')
-                print(f'Product Name: {i["product_name"]}')
-                print(f'Price: {i["product_price"]}\n')
-
+                print(f'''
+                SKU: {i["sku"]}
+                Product Category: {i["product_category"]}
+                Product Name: {i["product_name"]}
+                Price: {i["product_price"]}
+                ''')
                 transaction_id = random.randint(1000000, 9999999)
                 customer_id = customer["customer_id"]
                 customer_name = f'{customer["first_name"]} {customer["last_name"]}'
@@ -92,9 +117,13 @@ def sell():
                 prod_sku = i["sku"]
                 prod_name = (i["product_name"])
                 while True:
-                    quantity = int(input("Quantity (QTY):\n"))
+                    quantity = int(input('''
+                Quantity (QTY):
+                '''))
                     if quantity > i["stock_capacity"]:
-                        print(f'\nQuantity entered exceeds stock available. Available Quantity: {i["stock_capacity"]}.\n')
+                        print(f'''
+                        Quantity entered exceeds stock available.
+                        Available Quantity: {i["stock_capacity"]}.''')
                     elif quantity < i["stock_capacity"]:
                         break
                 
@@ -122,7 +151,9 @@ def sell():
                 
             
 
-                confirmation = input("Would you like anything else? (Y/N)\n").upper()
+                confirmation = input('''
+                Would you like anything else? (Y/N)
+                ''').upper()
 
                 if confirmation == "Y":
                     new_order
@@ -144,11 +175,23 @@ def sell():
                             --------- Welcome again ---------
                     ''')
 
-                    print(f'\nTotal: {sum(totals_list)}\n')
-                    cash_given = int(input("Amount Tendered (Ksh):"))
+                    print(f'''
+                    Total: {sum(totals_list)}
+                    ''')
+                    while True:
+                        try:
+                            cash_given = int(input('''
+                        Amount Tendered (Ksh):
+                        '''))
+                            break
+                        except:
+                            print('''
+                        Invalid value! Try again.
+                        ''')
                     change = cash_given - sum(totals_list)
-                    print(f'Change: Ksh. {change}\n')
-
+                    print(f'''
+                        Change: Ksh. {change}
+                        ''')
                     print(receipt)
 
                     new_order = False
@@ -203,10 +246,6 @@ def search_transactions():
             purchase_operations()
         else:
             print("\nInvalid input! Exiting...\n")
-
-
-                
-
 
 if __name__ == "__main__":
     purchase_operations()
