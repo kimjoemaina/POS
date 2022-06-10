@@ -32,7 +32,6 @@ def menu():
                 purchase_operations()
                 break
             elif selection == 4:
-                exit()
                 break
             else:
                 print('''
@@ -41,7 +40,8 @@ def menu():
         except ValueError:
             print('''
         Invalid input! Please enter a valid value.
-        ''')  
+        ''') 
+        break
 
 if __name__ == "__main__":
     menu()
