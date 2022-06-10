@@ -18,13 +18,13 @@ class Product:
     
     def __str__(self):
         p_info = (f"""
-        SKU: {self.sku}
+        SKU             : {self.sku}
         Product Category: {self.product_category}
-        Product Name: {self.product_name}
-        Price: {self.product_price}
-        Vendor: {self.product_vendor}
+        Product Name    : {self.product_name}
+        Price           : {self.product_price}
+        Vendor          : {self.product_vendor}
         Vendor Phone No.: {self.vendor_phone}
-        Stock Capacity: {self.stock_capacity}
+        Stock Capacity  : {self.stock_capacity}
         """)
 
         return p_info
@@ -33,70 +33,97 @@ class Product:
 
 def product_menu():
     while True:
-        print("Select a Product Operation.")
-        print(" [1] Add New Item ")
-        print(" [2] Delete Item ")
-        print(" [3] Update Existing Item ")
-        print(" [4] View Existing Item ")
-        print(" [5] View Product Database ")
-        print(" [6] Back to main menu ")
-        # print(" (6) Go back ")
+        print('''
+        ------------ Product Menu ------------
 
-        selection = int(input("Enter product operation: \n"))
+        Select a Product Operation
 
-        if selection == 1:
-            add_new_item()
-            product_menu()
-            break
-        elif selection == 2:
-            delete_item()
-            product_menu()
-            break
-        elif selection == 3:
-            update_product()
-            product_menu()
-            break
-        elif selection == 4:
-            view_item()
-            product_menu()
-            break
-        elif selection == 5:
-            view_product_db()
-            product_menu()
-            break
-        elif selection == 6:
-            from main import menu
-            menu()
-            break
-        else:
-            print("Invalid selection! Please try again.")
+        [1] Add New Item
+        [2] Delete Item
+        [3] Update Existing Item
+        [4] View Existing Item
+        [5] View Product Database
+        [6] Back to main menu 
+        ''')
+
+        try:
+            selection = int(input('''
+        Enter product operation:
+        '''))
+
+            if selection == 1:
+                add_new_item()
+                product_menu()
+                break
+            elif selection == 2:
+                delete_item()
+                product_menu()
+                break
+            elif selection == 3:
+                update_product()
+                product_menu()
+                break
+            elif selection == 4:
+                view_item()
+                product_menu()
+                break
+            elif selection == 5:
+                view_product_db()
+                product_menu()
+                break
+            elif selection == 6:
+                from main import menu
+                menu()
+                break
+            else:
+                print('''
+        Invalid selection! Please try again.
+        ''')
+        except ValueError:
+            print('''
+        Invalid input. Try again.
+        ''')
 
 # 1. Add product to database
 def add_new_item():
     with open(filename) as product_db:
         product_data = json.load(product_db)
         sku_generator = random.randint(10000, 99999)
-        product_category = input("Product category:\n").capitalize()
-        product_name = input("Product Name:\n").capitalize()
+        product_category = input('''
+        Product category:
+        ''').capitalize()
+        product_name = input('''
+        Product Name:
+        ''').capitalize()
         
         while True:
-            product_price = input("Product price (NUMBERS ONLY. NO SPECIAL CHARACTERS):\n")
             try:
-                value = int(product_price)
+                product_price = int(input('''
+        Product price (NUMBERS ONLY. NO SPECIAL CHARACTERS):
+        '''))
                 break
             except ValueError:
-                print("Invalid input! Try again.\n")
+                print('''
+        Invalid input! Try again.
+        ''')
         
-        vendor = input("Vendor:\n").capitalize()
-        vendor_phone = input("Vendor Phone No.:\n")
+        vendor = input('''
+        Vendor:
+        ''').capitalize()
+        vendor_phone = input('''
+        Vendor Phone No.:
+        ''')
 
         while True:
-            items_in_stock = input("No. of items (NUMBERS ONLY. NO SPECIAL CHARACTERS):\n")
             try:
-                stock_value = int(items_in_stock)
+                items_in_stock = int(input('''
+        No. of items (NUMBERS ONLY. NO SPECIAL CHARACTERS):
+        '''))
                 break
             except:
-                print("Invalid input! Try again.\n")
+                print('''
+        Invalid input! Try again.
+        ''')
 
         new_product = Product(sku_generator, product_category, product_name, product_price, vendor, vendor_phone, items_in_stock)
         p_details = new_product.__dict__
@@ -104,13 +131,22 @@ def add_new_item():
     
     with open(filename, "w") as f:
         json.dump(product_data, f, indent=4)
-    print(f"\nProduct {sku_generator} added successfully!\n")
+    print(f'''
+        Product {sku_generator} added successfully!
+        ''')
 
 # 2. Delete product from database
 def delete_item():
     with open(filename) as product_db:
         product_data = json.load(product_db)
-        p_ref = int(input("Enter product SKU:\n"))
+        while True:
+            try:
+                p_ref = int(input('''
+                Enter product SKU:
+                '''))
+                break
+            except ValueError:
+                print("Invalid value. Try again.")
 
         j = 0
 
@@ -119,20 +155,31 @@ def delete_item():
             if i["sku"] == p_ref:
                 for key, value in i.items():
                     print("{} : {}".format(key, value))
-                warning = input("\nAre you sure? ***THIS ACTION IS IRREVERSIBLE*** (Y/N)\n").upper()
+                warning = input('''
+                Are you sure?
+                ***THIS ACTION IS IRREVERSIBLE*** (Y/N)
+                ''').upper()
                 if warning == "Y":
                     product_data.pop(j)
-                    print(f"\nProduct {p_ref} deleted successfully!\n")
+                    print(f'''
+                Product {p_ref} deleted successfully!
+                ''')
                     break
                 elif warning == "N":
-                    print("\nNo changes made!\n")
+                    print('''
+                No changes made!
+                ''')
                     break
                 else:
-                    print("\nInvalid input!\n")
+                    print('''
+                Invalid input!
+                ''')
                     break
             j += 1
         else:
-            print("\nProduct not found!\n")
+            print('''
+            Product not found!
+            ''')
             
 
     with open(filename, "w") as f:
@@ -143,7 +190,18 @@ def delete_item():
 def update_product():
     with open(filename) as product_db:
         product_data = json.load(product_db)
-        update_p = input("Which product would you like to update?\nEnter product SKU:\n")
+
+        while True:
+            try:
+                update_p = int(input('''
+            Which product would you like to update?
+            Enter product SKU:
+            '''))
+                break
+            except:
+                print('''
+            Invalid value. Try again!
+            ''')
 
         for i in product_data:
             p = Product(i["sku"], i["product_category"], i["product_name"], i["product_price"], i["product_vendor"], i["vendor_phone"], i["stock_capacity"])
@@ -162,64 +220,116 @@ def update_product():
                 [7] Stock Capacity
                 ''')
                 # update attribute
-                update_a = int(input("Which attribute would you like to update?\n"))
+                while True:
+                    try:
+                        update_a = int(input('''
+                Which attribute would you like to update?
+                '''))
+                        break
+                    except ValueError:
+                        print('''
+                Invalid Value. Try again.
+                ''')
                 # Product SKU update
                 if update_a == 1:
-                    new_sku = str(random.randint(10000, 99999))
-                    confirm = input("\nAre you sure of this action? (Y/N)\n*** THIS ACTION IS IRREVERSIBLE! ***\n").upper()
+                    new_sku = random.randint(10000, 99999)
+                    confirm = input('''
+                    Are you sure of this action? (Y/N)
+                    *** THIS ACTION IS IRREVERSIBLE! ***
+                    ''').upper()
                     if confirm == "Y":
                         i["sku"] = new_sku
-                        print(f"\nProduct updated successfully! New SKU: {new_sku}.\n")
+                        print(f'''
+                        Product updated successfully! New SKU: {new_sku}.
+                        ''')
                         break
                     elif confirm == "N":
-                        print("\nNo changes made!\n")
+                        print('''
+                        No changes made!
+                        ''')
                         break
                     else:
-                        print("\nInvalid input!\n")
+                        print('''
+                        Invalid input!
+                        ''')
                         break
                 # Product category update
                 if update_a == 2:
-                    new_pc = input("Enter new category:\n").capitalize()
-                    confirm = input("\nAre you sure of this action? (Y/N)\n*** THIS ACTION IS IRREVERSIBLE! ***\n").upper()
+                    new_pc = input('''
+                    Enter new category:
+                    ''').capitalize()
+                    confirm = input('''
+                    Are you sure of this action? (Y/N)
+                    *** THIS ACTION IS IRREVERSIBLE! ***
+                    ''').upper()
                     if confirm == "Y":
                         i["product_category"] = new_pc
-                        print(f"\nProduct updated successfully! New product category: {new_pc}.\n")
+                        print(f'''
+                        Product updated successfully! New product category: {new_pc}.
+                        ''')
                         break
                     elif confirm == "N":
-                        print("\nNo changes made!\n")
+                        print('''
+                        No changes made!
+                        ''')
                         break
                     else:
-                        print("\nInvalid input!\n")
+                        print('''
+                        Invalid input!
+                        ''')
                         break
                 
                 # Product name update
                 if update_a == 3:
-                    new_pn = input("Enter new name:\n").capitalize()
-                    confirm = input("\nAre you sure of this action? (Y/N)\n*** THIS ACTION IS IRREVERSIBLE! ***\n").upper()
+                    new_pn = input('''
+                    Enter new name:
+                    ''').capitalize()
+                    confirm = input('''
+                    Are you sure of this action? (Y/N)
+                    *** THIS ACTION IS IRREVERSIBLE! ***
+                    ''').upper()
                     if confirm == "Y":
                         i["product_name"] = new_pn
-                        print(f"Product updated successfully! New name:{new_pn}.\n")
+                        print(f'''
+                        Product updated successfully! New name:{new_pn}.
+                        ''')
                         break
                     elif confirm == "N":
-                        print("\nNo changes made!\n")
+                        print('''
+                        No changes made!
+                        ''')
                         break
                     else:
-                        print("\nInvalid input!\n")
+                        print('''
+                        Invalid input!
+                        ''')
                         break
                 
                 # Product price update
                 if update_a == 4:
-                    new_pp = input("Enter new price: (NUMBERS ONLY. NO SPECIAL CHARACTERS)\n")
-                    confirm = input("\nAre you sure of this action? (Y/N)\n*** THIS ACTION IS IRREVERSIBLE! ***\n").upper()
+                    new_pp = input('''
+                    Enter new price:
+                    (NUMBERS ONLY. NO SPECIAL CHARACTERS)
+                    ''')
+                    confirm = input('''
+                    Are you sure of this action? (Y/N)
+                    *** THIS ACTION IS IRREVERSIBLE! ***
+                    ''').upper()
                     if confirm == "Y":
                         i["product_price"] = new_pp
-                        print(f"Product updated successfully! New price: {new_pp}.\n")
+                        print(f'''
+                        Product updated successfully! New price: {new_pp}.
+                        ''')
                         break
                     elif confirm == "N":
-                        print("\nNo changes made!\n")
+                        print('''
+                        No changes made!
+                        ''')
                         break
                     else:
-                        print("\nInvalid input!\n")
+                        print('''
+                        Invalid input!
+                        ''')
                         break
 
                 # Product vendor update
@@ -301,7 +411,9 @@ def update_product():
                         print("\nInvalid input!\n")
                         break
         else:
-            print("\nProduct not found!\n")
+            print('''
+            Product not found!
+            ''')
     
     with open(filename, "w") as f:
         json.dump(product_data, f, indent=4)
