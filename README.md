@@ -84,15 +84,15 @@ You cannot sell more products than those available in the stock capacity.
 
 All purchases are recorded in `purchases.json`. The file includes:
 
-`Transaction ID`
-`Customer ID`
-`Customer Name`
-`Product SKU`
-`Product Names`
-`Prices`
-`Quantities`
-`Transaction Date`
-`Product Totals`
+`Transaction ID`,
+`Customer ID`,
+`Customer Name`,
+`Product SKU`,
+`Product Names`,
+`Prices`,
+`Quantities`,
+`Transaction Date`,
+`Product Totals`,
 `Grand Total`
 
 You can view the transactions database and sort ascending by date, name or transaction ID.
