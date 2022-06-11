@@ -55,27 +55,37 @@ def customer_menu():
             if selection == 1:
                 add_customer()
                 customer_menu()
+                break
             elif selection == 2:
                 delete_customer()
                 customer_menu()
+                break
             elif selection == 3:
                 update_customer()
+                customer_menu()
+                break
             elif selection == 4:
                 view_customer()
                 customer_menu() 
+                break
             elif selection == 5:
                 view_customer_db()
+                customer_menu()
+                break
             elif selection == 6:
-                query_no_of_customers()    
+                query_no_of_customers()
+                customer_menu()
+                break   
             elif selection == 7:
                 from main import menu
                 menu()
-
+                break
             else:
                 print("\n\tInvalid selection! Please try again.\t\t")
         except:
             print("\n\tInvalid input! Please enter a valid value.\t\t")
-
+            
+        
 # 1. Add customer to JSON file
 def add_customer():
     with open(filename) as customer_db:
@@ -397,8 +407,3 @@ def query_no_of_customers():
         for i in customer_data:
             j += 1
         print(f"\n\tThere are {j} customers in the database!\n\t")
-    
-    
-
-if __name__ == "__main__":
-    customer_menu()
