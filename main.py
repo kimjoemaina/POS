@@ -28,11 +28,13 @@ def menu():
                 purchase_operations()
                 break
             elif selection == 4:
-                exit()
+                break
             else:
                 print("\n\t\tInvalid selection. Try again.\n")
         except ValueError:
-            print("\n\t\tInvalid input! Please enter a valid value.\n") 
+            print("\n\t\tInvalid input! Please enter a valid value.\n")
+        
+     
 
 if __name__ == "__main__":
     menu()
