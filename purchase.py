@@ -96,7 +96,12 @@ def sell():
                 prod_sku = i["sku"]
                 prod_name = (i["product_name"])
                 while True:
-                    quantity = int(input('\n\tQuantity (QTY):\n\t'))
+                    try:
+                        quantity = int(input('\n\tQuantity (QTY):\n\t'))
+                        break
+                    except ValueError:
+                        print("\n\tInvalid value entered. Please enter a valid quantity.\n\t")
+
                     if quantity > i["stock_capacity"]:
                         print(f'\n\tQuantity entered exceeds stock available.\n\tAvailable Quantity: {i["stock_capacity"]}.\n\t')
                     elif quantity < i["stock_capacity"]:
@@ -131,6 +136,7 @@ def sell():
                 if confirmation == "Y":
                     new_order
                 elif confirmation == "N":
+                    new_order = False
                     receipt = (f'''
                                 --------- Receipt ---------
 
@@ -150,16 +156,16 @@ def sell():
 
                     print(f"\n\tTotal: {sum(totals_list)}\n\t")
                     while True:
-                        try:
-                            cash_given = int(input("\n\tAmount Tendered (Ksh):\n\t"))
+                        cash_given = int(input("\n\tAmount Tendered (Ksh):\n\t"))
+                        if cash_given < sum(totals_list):
+                            print(f'\n\tAmount entered is less than the total amount. Please enter an amount equal to or greater than the total.\n\t')
+                        else:
+                            change = cash_given - sum(totals_list)
+                            print(f"\n\tChange: Ksh. {change}\n\t")
+                            print(receipt)
                             break
-                        except:
-                            print("\n\tInvalid value! Try again.\n\t")
-                    change = cash_given - sum(totals_list)
-                    print(f"\n\tChange: Ksh. {change}\n\t")
-                    print(receipt)
 
-                    new_order = False
+                    
 
     purchase_data.append(purchase)   
                 
