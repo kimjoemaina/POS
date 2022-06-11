@@ -76,7 +76,8 @@ def product_menu():
                 break
             elif selection == 6:
                 query_no_items()
-                product_menu
+                product_menu()
+                break
             elif selection == 7:
                 from main import menu
                 menu()
