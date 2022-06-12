@@ -13,7 +13,7 @@ class Purchase:
         self.transaction_id = transaction_id
         self.customer_id = customer_id
         self.customer_name = customer_name
-        self.product_sku = product_skus
+        self.product_skus = product_skus
         self.product_name = product_name
         self.price = int(price)
         self.quantities = int(quantities)
