@@ -101,14 +101,15 @@ def sell():
                 while True:
                     try:
                         quantity = int(input('\n\tQuantity (QTY):\n\t'))
-                        break
+                        if quantity > i["stock_capacity"]:
+                            print(f'\n\tQuantity entered exceeds stock available.\n\tAvailable Quantity: {i["stock_capacity"]}.\n\t')
+                        elif quantity < i["stock_capacity"]:
+                            break
+
                     except ValueError:
                         print("\n\tInvalid value entered. Please enter a valid quantity.\n\t")
 
-                    if quantity > i["stock_capacity"]:
-                        print(f'\n\tQuantity entered exceeds stock available.\n\tAvailable Quantity: {i["stock_capacity"]}.\n\t')
-                    elif quantity < i["stock_capacity"]:
-                        break
+                
                 
                 today = datetime.now()
                 date = today.strftime("%d/%m/%Y")
