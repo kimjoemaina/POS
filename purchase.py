@@ -171,7 +171,8 @@ def sell():
                                 break
                         break      
                     elif confirmation != "Y" and confirmation != "N":
-                        print("\n\tInvalid input. Try again.\n\t")    
+                        print("\n\tInvalid input. Try again.\n\t")
+                break                
         else:
             print("\n\tProduct not in database.\n\n\tPlease add the desired product\n\tfrom the product operations menu.\n\t")
                 
