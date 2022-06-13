@@ -41,6 +41,7 @@ def purchase_operations():
                 check = input("\n\tNew or existing customer?\n\t[N] New\n\t[E] Existing\n\t").upper()
                 if check == "N":
                     new_customer = add_customer()
+                    break
                 elif check == "E":
                     sell()
                     purchase_operations()
@@ -49,6 +50,7 @@ def purchase_operations():
                     print("\n\tInvalid input!\n\tTry again.\n\t")
             elif selection == 2:
                 search_transactions()
+                break
             elif selection == 3:
                 from main import menu
                 menu()
@@ -57,8 +59,7 @@ def purchase_operations():
                 print("\n\tInvalid selection! Try again.\n\t")
         except:
             print("\n\tInvalid value. Try again.\n\t")
-
-
+        
 def sell():
     product_skus = []
     product_names = []
@@ -72,8 +73,7 @@ def sell():
         customer_data = json.load(customer_db)
         customer = view_customer()
 
-        if customer == None:
-            purchase_operations()
+        
 
     with open(products) as product_db:
         product_data = json.load(product_db)
@@ -84,6 +84,9 @@ def sell():
         purchase_data = json.load(purchase_db)
 
     while new_order:
+        if customer == None:
+            break
+
         product_id = int(input("\n\tEnter product SKU:\n\t"))
 
         for i in product_data:
