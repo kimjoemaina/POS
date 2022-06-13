@@ -41,6 +41,7 @@ def purchase_operations():
                 check = input("\n\tNew or existing customer?\n\t[N] New\n\t[E] Existing\n\t").upper()
                 if check == "N":
                     new_customer = add_customer()
+                    purchase_operations()
                     break
                 elif check == "E":
                     sell()
@@ -50,6 +51,7 @@ def purchase_operations():
                     print("\n\tInvalid input!\n\tTry again.\n\t")
             elif selection == 2:
                 search_transactions()
+                purchase_operations()
                 break
             elif selection == 3:
                 from main import menu
@@ -57,8 +59,9 @@ def purchase_operations():
                 break
             else:
                 print("\n\tInvalid selection! Try again.\n\t")
-        except:
+        except ValueError:
             print("\n\tInvalid value. Try again.\n\t")
+            
         
 def sell():
     product_skus = []
@@ -68,28 +71,27 @@ def sell():
     totals_list = []
     new_order = True
 
+    with open(products) as product_db:
+        product_data = json.load(product_db)
+
 
     with open(customers) as customer_db:
         customer_data = json.load(customer_db)
         customer = view_customer()
-
-        
-
-    with open(products) as product_db:
-        product_data = json.load(product_db)
-        print("\n\tWhat would you like to sell?\n\t")
-        
+            
 
     with open(purchase_file) as purchase_db:
         purchase_data = json.load(purchase_db)
 
+    
     while new_order:
         if customer == None:
-            break
+                break
+        print("\n\tWhat would you like to sell?\t")    
+        product_id = int(input("\tEnter product SKU:\n\t"))
 
-        product_id = int(input("\n\tEnter product SKU:\n\t"))
 
-        for i in product_data:
+        for i in product_data:  
             if i["sku"] == product_id:
                 print(f'\n\tSKU: {i["sku"]}\n\tProduct Category: {i["product_category"]}\n\tProduct Name: {i["product_name"]}\n\tPrice: {i["product_price"]}\n\t')
                 transaction_id = random.randint(1000000, 9999999)
@@ -108,8 +110,6 @@ def sell():
 
                     except ValueError:
                         print("\n\tInvalid value entered. Please enter a valid quantity.\n\t")
-
-                
                 
                 today = datetime.now()
                 date = today.strftime("%d/%m/%Y")
@@ -133,46 +133,47 @@ def sell():
 
                 i.update({"stock_capacity": new_stock_cnt})
                 
-            
 
-                confirmation = input("\n\tWould you like anything else? (Y/N)\n\t").upper()
+                while True:
+                    confirmation = input("\n\tWould you like anything else? (Y/N)\n\t").upper()                    
+                    if confirmation == "Y":
+                        new_order
+                        break
+                    elif confirmation == "N":
+                        new_order = False
+                        receipt = (f'''
+                                    --------- Receipt ---------
 
-                if confirmation == "Y":
-                    new_order
-                elif confirmation == "N":
-                    new_order = False
-                    receipt = (f'''
-                                --------- Receipt ---------
+                            Transaction ID      :      {transaction_id}
+                            Customer ID         :      {customer_id}
+                            Customer Name       :      {customer_name}
+                            Products SKU        :      {purchase["product_sku"]}
+                            Product Names       :      {purchase["product_name"]}
+                            Prices              :      {purchase["price"]}
+                            Quantities          :      {purchase["quantities"]}
+                            Date                :      {purchase["date"]}
+                            Totals              :      {purchase["totals"]}
+                            Grand Total         :      {purchase["grand_total"]}
 
-                        Transaction ID      :      {transaction_id}
-                        Customer ID         :      {customer_id}
-                        Customer Name       :      {customer_name}
-                        Products SKU        :      {purchase["product_sku"]}
-                        Product Names       :      {purchase["product_name"]}
-                        Prices              :      {purchase["price"]}
-                        Quantities          :      {purchase["quantities"]}
-                        Date                :      {purchase["date"]}
-                        Totals              :      {purchase["totals"]}
-                        Grand Total         :      {purchase["grand_total"]}
+                                --------- Welcome again ---------
+                        ''')
 
-                            --------- Welcome again ---------
-                    ''')
-
-                    print(f"\n\tTotal: {sum(totals_list)}\n\t")
-                    while True:
-                        cash_given = int(input("\n\tAmount Tendered (Ksh):\n\t"))
-                        if cash_given < sum(totals_list):
-                            print(f'\n\tAmount entered is less than the total amount. Please enter an amount equal to or greater than the total.\n\t')
-                        else:
-                            change = cash_given - sum(totals_list)
-                            print(f"\n\tChange: Ksh. {change}\n\t")
-                            print(receipt)
-                            break
-
-                    
-
-    purchase_data.append(purchase)   
-                
+                        print(f"\n\tTotal: {sum(totals_list)}\n\t")
+                        while True:
+                            cash_given = int(input("\n\tAmount Tendered (Ksh):\n\t"))
+                            if cash_given < sum(totals_list):
+                                print(f'\n\tAmount entered is less than the total amount. Please enter an amount equal to or greater than the total.\n\t')
+                            else:
+                                change = cash_given - sum(totals_list)
+                                print(f"\n\tChange: Ksh. {change}\n\t")
+                                print(receipt)
+                                purchase_data.append(purchase)
+                                break
+                        break      
+                    elif confirmation != "Y" and confirmation != "N":
+                        print("\n\tInvalid input. Try again.\n\t")    
+        else:
+            print("\n\tProduct not in database.\n\n\tPlease add the desired product\n\tfrom the product operations menu.\n\t")
                 
     with open (products, "w") as p:
         json.dump(product_data, p, indent=4)
