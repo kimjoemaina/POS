@@ -407,3 +407,6 @@ def query_no_of_customers():
         for i in customer_data:
             j += 1
         print(f"\n\tThere are {j} customers in the database!\n\t")
+
+if __name__ == "__main__":
+    customer_menu()
