@@ -82,8 +82,11 @@ def customer_menu():
                 break
             else:
                 print("\n\tInvalid selection! Please try again.\t\t")
-        except:
+        except ValueError:
             print("\n\tInvalid input! Please enter a valid value.\t\t")
+
+        
+        
             
         
 # 1. Add customer to JSON file
@@ -195,7 +198,7 @@ def update_customer():
                         break
                 # Customer First Name update
                 elif update_a == 2:
-                    new_first_name = input("\n\tEnter new first name:\"").capitalize()
+                    new_first_name = input("\n\tEnter new first name:\n\t").capitalize()
 
                     confirm = input("\n\tAre you sure of this action? (Y/N)\"*** THIS ACTION IS IRREVERSIBLE! ***\n\t").upper()
 
@@ -212,7 +215,7 @@ def update_customer():
 
                 # Customer last name update
                 elif update_a == 3:
-                    new_last_name = input("\n\tEnter new last name:\"").capitalize()
+                    new_last_name = input("\n\tEnter new last name:\n\t").capitalize()
                     confirm = input("\n\tAre you sure of this action? (Y/N)\n\t*** THIS ACTION IS IRREVERSIBLE! ***\n\t").upper()
                     if confirm == "Y":
                         i["last_name"] = new_last_name
@@ -228,7 +231,7 @@ def update_customer():
                 # Customer age update
                 elif update_a == 4:
                     new_age = input("\n\tEnter new age:\n\t")
-                    confirm = input("Are you sure of this action? (Y/N)\n\t*** THIS ACTION IS IRREVERSIBLE! ***\n\t").upper()
+                    confirm = input("\n\tAre you sure of this action? (Y/N)\n\t*** THIS ACTION IS IRREVERSIBLE! ***\n\t").upper()
                     if confirm == "Y":
                         i["age"] = new_age
                         print(f"\n\tCustomer updated successfully! New age: {new_age}.\n\t")
@@ -292,7 +295,7 @@ def update_customer():
                     
     with open(filename, "w") as f:
         json.dump(customer_data, f, indent=4)
-    customer_menu()
+
 
 # 4. View customer details using Customer ID
 def view_customer():
@@ -305,7 +308,7 @@ def view_customer():
             break
         except ValueError:
             print("\n\tInvalid input! Try again.\n\t")
-
+            pass
     for i in customer_data:
         # instance of customer class
         c = Customer(i["customer_id"], i["first_name"], i["last_name"], i["age"], i["phone"], i["email"], i["city"], i["reg_date"])
