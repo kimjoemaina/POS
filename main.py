@@ -17,7 +17,7 @@ def menu():
         ''')
 
         try:
-            selection = int(input('\t\tEnter your choice:\n\t\t'))
+            selection = int(input('\n\tEnter your choice:\n\t'))
             if selection == 1:
                 customer_menu()
                 break
