@@ -30,9 +30,9 @@ def menu():
             elif selection == 4:
                 break
             else:
-                print("\n\t\tInvalid selection. Try again.\n")
+                print("\n\tInvalid selection. Try again.\n")
         except ValueError:
-            print("\n\t\tInvalid input! Please enter a valid value.\n")
+            print("\n\tInvalid input! Please enter a valid value.\n")
         
      
 
